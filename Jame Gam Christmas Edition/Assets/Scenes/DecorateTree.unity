@@ -171,7 +171,7 @@ MonoBehaviour:
   startingX: -5
   startingY: -2
   spawnVariability: 3
-  numOrnaments: 3
+  numOrnaments: 5
 --- !u!1 &814778313
 GameObject:
   m_ObjectHideFlags: 0

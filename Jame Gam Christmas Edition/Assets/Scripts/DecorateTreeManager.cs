@@ -20,8 +20,8 @@ public class DecorateTreeManager : MonoBehaviour
     private List<GameObject> ornaments = new List<GameObject>();
 
     // Variables
-    private bool isGameWon;
-    private bool isTimeUp;
+    private bool isGameWon = false;
+    private bool isTimeUp = false;
     private GameObject newOrnament;
     [SerializeField] float startingX;
     [SerializeField] float startingY;
