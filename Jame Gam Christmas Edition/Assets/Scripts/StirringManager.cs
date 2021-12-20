@@ -27,13 +27,24 @@ public class StirringManager : MonoBehaviour
 
     private int score = 0;
 
+    [SerializeField]
+    private int targetScore = 100;
+
     private Vector3 mousePos;
 
     // Start is called before the first frame update
     private void Start()
     {
+        // Hides all points
+        for (int i = 0; i < stirPoints.Length; i++)
+        {
+            stirPoints[i].gameObject.SetActive(false);
+        }
+
+        // Sets activePointIndex to 0
         activePointIndex = 0;
 
+        // Sets up first active point
         activePoint = stirPoints[activePointIndex];
         setupActivePoint();
     }
@@ -41,23 +52,30 @@ public class StirringManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (score >= 100)
+        // If player reaches target score, they win
+        if (score >= targetScore)
         {
             Debug.Log("You Win!");
             return;
         }
 
+        // If time runs out, player loses
         if (timer.IsTimeUp())
         {
             Debug.Log("You Lose!");
             return;
         }
 
+        // Updates mouse position
         UpdateMousePosition();
 
+        // Updates spoon position
         UpdateSpoon();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void UpdateMousePosition()
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -70,6 +88,8 @@ public class StirringManager : MonoBehaviour
 
     public void SetNextActivePoint()
     {
+        activePoint.gameObject.SetActive(false);
+
         activePoint.isActivePoint = false;
 
         activePointRenderer.material.color = Color.white;
@@ -91,6 +111,8 @@ public class StirringManager : MonoBehaviour
     private void setupActivePoint()
     {
         score++;
+
+        activePoint.gameObject.SetActive(true);
 
         activePoint.isActivePoint = true;
 
