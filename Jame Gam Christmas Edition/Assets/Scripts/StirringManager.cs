@@ -55,6 +55,7 @@ public class StirringManager : MonoBehaviour
         // If player reaches target score, they win
         if (score >= targetScore)
         {
+            timer.StopBarDrain();
             Debug.Log("You Win!");
             return;
         }

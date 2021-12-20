@@ -76,6 +76,7 @@ public class GetGiftsManager : MonoBehaviour
 
                 if (objectsToGet.Count == 0)
                 {
+                    timer.StopBarDrain();
                     Debug.Log("You Win!");
                     hasWon = true;
                 }

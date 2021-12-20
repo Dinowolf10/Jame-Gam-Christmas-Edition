@@ -43,6 +43,7 @@ public class DecorateHouseManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp)
         {
+            timer.StopBarDrain();
             Debug.Log("WIN");
         }
 

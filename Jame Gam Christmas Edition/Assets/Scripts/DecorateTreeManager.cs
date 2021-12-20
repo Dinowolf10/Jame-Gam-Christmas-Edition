@@ -45,6 +45,7 @@ public class DecorateTreeManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp)
         {
+            timer.StopBarDrain();
             Debug.Log("WIN");
         }
 

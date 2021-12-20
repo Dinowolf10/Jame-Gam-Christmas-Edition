@@ -37,6 +37,7 @@ public class CleanHouseSceneManager : MonoBehaviour
         if (dirt.transform.childCount == 0 && !isTimeUp)
         {
             isGameWon = true;
+            timer.StopBarDrain();
             Debug.Log("WIN");
         }
 

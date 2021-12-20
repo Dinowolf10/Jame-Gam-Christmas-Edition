@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// file: Timer.cs
@@ -11,7 +12,15 @@ public class Timer : MonoBehaviour
 {
     // Variables
     [SerializeField] float timeRemaining = 10;
+    [SerializeField] Image timerBar;
+    private float maxTime;
     private bool isTimeUp = false;
+    private bool drainBar = true;
+
+    private void Start()
+    {
+        maxTime = timeRemaining;
+    }
 
     // Update is called once per frame
     void Update()
@@ -19,6 +28,10 @@ public class Timer : MonoBehaviour
         if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
+            if (drainBar)
+            {
+                timerBar.fillAmount = timeRemaining / maxTime;
+            }
         }
         else
         {
@@ -29,5 +42,10 @@ public class Timer : MonoBehaviour
     public bool IsTimeUp()
     {
         return isTimeUp;
+    }
+
+    public void StopBarDrain()
+    {
+        drainBar = false;
     }
 }

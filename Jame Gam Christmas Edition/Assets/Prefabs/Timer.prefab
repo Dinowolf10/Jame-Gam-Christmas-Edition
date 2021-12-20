@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeRemaining: 5
+  timerBar: {fileID: 4081247159209773127, guid: ef586e30269a3e94a95f9be077d4f45b, type: 3}
