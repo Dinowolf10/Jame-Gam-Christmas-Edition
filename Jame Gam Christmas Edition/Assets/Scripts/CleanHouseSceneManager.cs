@@ -47,7 +47,11 @@ public class CleanHouseSceneManager : MonoBehaviour
     }
 
     /// <summary>
+<<<<<<< Updated upstream
     /// Checks if the timer has run out 
+=======
+    /// Checks the Timer to see if time has run out
+>>>>>>> Stashed changes
     /// </summary>
     private void CheckTime()
     {
