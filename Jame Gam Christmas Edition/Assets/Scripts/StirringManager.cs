@@ -74,50 +74,67 @@ public class StirringManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Updates and stores mouse position
     /// </summary>
     private void UpdateMousePosition()
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
 
+    /// <summary>
+    /// Updates spoon position to match the mouse position
+    /// </summary>
     private void UpdateSpoon()
     {
         spoonTransform.position = new Vector3(mousePos.x, mousePos.y, 0);
     }
 
+    /// <summary>
+    /// Sets the next active point in the stirPoints array
+    /// </summary>
     public void SetNextActivePoint()
     {
+        // Hides current active point and sets their isActivePoint bool to false
         activePoint.gameObject.SetActive(false);
-
         activePoint.isActivePoint = false;
 
+        // Resets the current active point color to white
         activePointRenderer.material.color = Color.white;
 
+        // If the activePointIndex has reached the end of the stirPoints array, set activePointIndex to 0
         if (activePointIndex + 1 >= stirPoints.Length)
         {
             activePointIndex = 0;
         }
+        // Otherwise increment activePointIndex
         else
         {
             activePointIndex++;
         }
 
+        // Set current active point to the active point index in stirPoints
         activePoint = stirPoints[activePointIndex];
 
+        // Setup the new active point
         setupActivePoint();
     }
 
+    /// <summary>
+    /// Sets up the current active point
+    /// </summary>
     private void setupActivePoint()
     {
+        // Increases score
         score++;
 
+        // Activates the current active point and sets their isActivePoint bool to true
         activePoint.gameObject.SetActive(true);
-
         activePoint.isActivePoint = true;
 
+        // Stores a reference to the activePoint's renderer component
         activePointRenderer = activePoint.gameObject.GetComponent<Renderer>();
 
+        // Sets the active point's color to green
         activePointRenderer.material.color = Color.green;
     }
 }
