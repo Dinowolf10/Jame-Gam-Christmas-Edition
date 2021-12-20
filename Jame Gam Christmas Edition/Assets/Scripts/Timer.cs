@@ -26,10 +26,6 @@ public class Timer : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Checks if the timer has run out
-    /// </summary>
-    /// <returns>boolean representing if the timer as run out</returns>
     public bool IsTimeUp()
     {
         return isTimeUp;
