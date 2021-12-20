@@ -22,6 +22,8 @@ public class GetGiftsManager : MonoBehaviour
     // Populated at start
     public Dictionary<string, GameObject> objectsToGet = new Dictionary<string, GameObject>();
 
+    private bool hasWon = false;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -39,7 +41,7 @@ public class GetGiftsManager : MonoBehaviour
         }
 
         // Checks if timer is up
-        if (timer.IsTimeUp())
+        if (timer.IsTimeUp() && !hasWon)
         {
             Debug.Log("You Lose!");
         }
@@ -75,6 +77,7 @@ public class GetGiftsManager : MonoBehaviour
                 if (objectsToGet.Count == 0)
                 {
                     Debug.Log("You Win!");
+                    hasWon = true;
                 }
             }
         }
