@@ -30,4 +30,13 @@ public class StirPoint : MonoBehaviour
             stirringManager.SetNextActivePoint();
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isActivePoint)
+        {
+            Debug.Log("Correct Point!");
+            stirringManager.SetNextActivePoint();
+        }
+    }
 }

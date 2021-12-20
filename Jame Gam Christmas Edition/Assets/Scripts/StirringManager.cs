@@ -12,6 +12,10 @@ public class StirringManager : MonoBehaviour
     [SerializeField]
     private Transform spoonTransform;
 
+    // Reference stored in inspector
+    [SerializeField]
+    private Timer timer;
+
     // Populated in inspector
     [SerializeField]
     private StirPoint[] stirPoints;
@@ -20,6 +24,8 @@ public class StirringManager : MonoBehaviour
     private Renderer activePointRenderer;
 
     private int activePointIndex = 0;
+
+    private int score = 0;
 
     private Vector3 mousePos;
 
@@ -35,6 +41,18 @@ public class StirringManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (score >= 100)
+        {
+            Debug.Log("You Win!");
+            return;
+        }
+
+        if (timer.IsTimeUp())
+        {
+            Debug.Log("You Lose!");
+            return;
+        }
+
         UpdateMousePosition();
 
         UpdateSpoon();
@@ -72,6 +90,8 @@ public class StirringManager : MonoBehaviour
 
     private void setupActivePoint()
     {
+        score++;
+
         activePoint.isActivePoint = true;
 
         activePointRenderer = activePoint.gameObject.GetComponent<Renderer>();
