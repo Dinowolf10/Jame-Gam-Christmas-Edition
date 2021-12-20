@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// file: CleanHouseSceneManager
+/// file: CleanHouseSceneManager.cs
 /// description: Manages the progress and completion of the Clean House Mini Game
 /// author: Nathan Ballay
 /// </summary>
@@ -46,6 +46,9 @@ public class CleanHouseSceneManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the timer has run out 
+    /// </summary>
     private void CheckTime()
     {
         isTimeUp = timer.IsTimeUp();
