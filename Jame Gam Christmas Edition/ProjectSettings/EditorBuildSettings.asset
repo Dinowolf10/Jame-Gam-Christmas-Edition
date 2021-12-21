@@ -6,6 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/BetweenGames.unity
+    guid: a4394bc262c76b149895f5896bc417de
+  - enabled: 1
+    path: Assets/Scenes/CleanHouse.unity
+    guid: 59d50a7dbf0964c4a9eaa6c765dd60de
+  - enabled: 1
+    path: Assets/Scenes/DecorateHouse.unity
+    guid: 1a2a59b82b2814b4fb4bba97a4164481
+  - enabled: 1
+    path: Assets/Scenes/DecorateTree.unity
+    guid: 6fac4ac05dc3dbb49a1e37e8fc687e75
+  - enabled: 1
     path: Assets/Scenes/GetGifts.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Stirring.unity
+    guid: 80b33bd1fa954ca49a57507278749a11
   m_configObjects: {}
