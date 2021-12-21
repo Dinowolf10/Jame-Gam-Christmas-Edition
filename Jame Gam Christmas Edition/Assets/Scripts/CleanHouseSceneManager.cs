@@ -27,7 +27,7 @@ public class CleanHouseSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         dirt = Instantiate(dirtPrefab, Vector3.zero, Quaternion.identity);
         
@@ -41,6 +41,7 @@ public class CleanHouseSceneManager : MonoBehaviour
 
         if (dirt.transform.childCount == 0 && !isTimeUp && !isWaiting)
         {
+
             isWaiting = true;
             isGameWon = true;
             timer.StopBarDrain();

@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
 {
     // Variables
     [SerializeField] float timeRemaining = 10;
-    [SerializeField] Image timerBar;
+    [SerializeField] Animator timerBar;
     private float maxTime;
     private bool isTimeUp = false;
     private bool drainBar = true;
@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
             timeRemaining -= Time.deltaTime;
             if (drainBar)
             {
-                timerBar.fillAmount = timeRemaining / maxTime;
+                timerBar.SetFloat("Progress", 1 - (timeRemaining / maxTime));
             }
         }
         else
