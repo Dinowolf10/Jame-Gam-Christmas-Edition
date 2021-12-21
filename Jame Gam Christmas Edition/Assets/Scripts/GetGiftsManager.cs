@@ -50,11 +50,40 @@ public class GetGiftsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Populates dictionary of objects to get
+    /// Populates dictionary of objects to get randomly based on score
     /// </summary>
     private void PopulateObjectsToGet()
     {
-        objectsToGet.Add(objects[0].name, objects[0]);
+        // Clears objectsToGet dictionary
+        objectsToGet.Clear();
+
+        // Stores gameManagerScore
+        int gameManagerScore = gameManager.GetScore();
+
+        // If user is in the first round of games
+        if (gameManagerScore <= 6)
+        {
+            // Get and populate 1 random gift game object to the objectsToGet dictionary
+            GameObject g = objects[Random.Range(0, 5)];
+            objectsToGet.Add(g.name, g);
+        }
+        // If user is in the second round of games
+        else if (gameManagerScore <= 12)
+        {
+            // Get 2 random gift game objects
+            GameObject g1 = objects[Random.Range(0, 5)];
+            GameObject g2 = objects[Random.Range(0, 5)];
+
+            // Make sure the two game objects are different
+            while (g1 == g2)
+            {
+                g2 = objects[Random.Range(0, 5)];
+            }
+
+            // Add the game objects to the objectsToGet dictionary
+            objectsToGet.Add(g1.name, g1);
+            objectsToGet.Add(g2.name, g2);
+        }
     }
 
     /// <summary>
@@ -62,25 +91,39 @@ public class GetGiftsManager : MonoBehaviour
     /// </summary>
     private void CheckObjectHit()
     {
+        // Shoots a raycast from the camera to the current mouse position and store the collider hit
         RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
+        // If there was a collider hit
         if (hit)
         {
+            // Store the name of the game object hit
             string name = hit.transform.gameObject.name;
 
+            // If the object hit is one of the objectsToGet
             if (objectsToGet.ContainsKey(name))
             {
+                // Hide the hit object
                 objectsToGet[name].SetActive(false);
 
+                // Remove the object from the objectsToGet dictionary
                 objectsToGet.Remove(name);
 
                 Debug.Log("Got Object!");
 
+                // If the objectsToGet count is 0 and the player is not currently waiting for the scene switch
                 if (objectsToGet.Count == 0 && !isWaiting)
                 {
+                    // Set isWaiting to true
                     isWaiting = true;
+
+                    // Stop the timer drain
                     timer.StopBarDrain();
+
+                    // Set won mini game to true in the gameManager
                     gameManager.WonMiniGame();
+
+                    // Set hasWon to true
                     hasWon = true;
                 }
             }
