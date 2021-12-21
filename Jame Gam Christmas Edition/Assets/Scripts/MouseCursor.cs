@@ -15,6 +15,8 @@ public class MouseCursor : MonoBehaviour
 
     private Vector2 mousePos;
 
+    private bool isHovering = false;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -35,9 +37,17 @@ public class MouseCursor : MonoBehaviour
         {
             cursorSR.sprite = mouseClick;
         }
-        else if (Input.GetMouseButtonUp(0))
+        
+        if (Input.GetMouseButtonUp(0))
         {
-            cursorSR.sprite = mouseNormal;
+            if (!isHovering)
+            {
+                cursorSR.sprite = mouseNormal;
+            } 
+            else
+            {
+                cursorSR.sprite = mouseHover;
+            }
         }
     }
 
@@ -51,21 +61,21 @@ public class MouseCursor : MonoBehaviour
         cursorTransform.position = mousePos;
     }
 
-    private void OnMouseEnter()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Enter Hovering");
-        //cursorSR.sprite = mouseHover;
-    }
-
-    private void OnMouseExit()
-    {
-        Debug.Log("Exit Hovering");
-        cursorSR.sprite = mouseNormal;
-    }
-
-    private void OnMouseOver()
-    {
-        Debug.Log("Hovering");
         cursorSR.sprite = mouseHover;
+        isHovering = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        cursorSR.sprite = mouseNormal;
+        isHovering = false;
+    }
+
+    public void ResetMouseState()
+    {
+        cursorSR.sprite = mouseNormal;
+        isHovering = false;
     }
 }

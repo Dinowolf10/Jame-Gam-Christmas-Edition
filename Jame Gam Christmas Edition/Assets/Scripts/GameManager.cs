@@ -10,6 +10,10 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    // Reference set in inspector
+    [SerializeField]
+    private MouseCursor mouseCursor;
+
     // Collections
     private HashSet<int> playedScenes = new HashSet<int>();
 
@@ -39,13 +43,18 @@ public class GameManager : MonoBehaviour
         {
             if (betweenTimer > 0)
             {
-                Debug.Log(betweenTimer);
+                //Debug.Log(betweenTimer);
                 betweenTimer -= Time.deltaTime;
             }
             else
             {
-                Debug.Log(betweenTimer);
+                //Debug.Log(betweenTimer);
+
+                // Resets mouse state to normal
+                mouseCursor.ResetMouseState();
+
                 betweenTimer = betweenWaitTime;
+
                 LoadNextScene();
             }
         }
@@ -53,6 +62,9 @@ public class GameManager : MonoBehaviour
 
     private void LoadNextScene()
     {
+        // Resets mouse state to normal
+        mouseCursor.ResetMouseState();
+
         int idx;
 
         // If all games have been played, reset the played games tracker

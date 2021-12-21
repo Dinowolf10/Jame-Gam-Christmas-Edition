@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf2808e90b098f4d9804f65cf4cc822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseCursor: {fileID: 265241773}
 --- !u!1 &223660092
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +371,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223660092}
   m_CullTransparentMesh: 1
+--- !u!114 &265241773 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8323189195493895391, guid: 5be0b8786d0f311419d30b3b589caeea, type: 3}
+  m_PrefabInstance: {fileID: 8323189195632224370}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c3369dc5fddf84595166de8d689be3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1218065727
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +477,7 @@ GameObject:
   - component: {fileID: 1273801086}
   - component: {fileID: 1273801085}
   - component: {fileID: 1273801084}
+  - component: {fileID: 1273801087}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -586,6 +599,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273801082}
   m_CullTransparentMesh: 1
+--- !u!61 &1273801087
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273801082}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 160, y: 40}
+  m_EdgeRadius: 0
 --- !u!1 &1735426684
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6f7b150de545a4383fa1c5cd81dfef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseCursor: {fileID: 265241773}
   betweenWaitTime: 3
 --- !u!4 &1735426686
 Transform:
