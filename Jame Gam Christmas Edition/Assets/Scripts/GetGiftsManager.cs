@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class GetGiftsManager : MonoBehaviour
 {
-    // Reference stored in inspector
+    // Reference set in inspector
     [SerializeField]
     private Camera cam;
 
-    // Reference stored in inspector
+    // Reference set in inspector
     [SerializeField]
     private Timer timer;
+
+    // Reference set in inspector
+    [SerializeField]
+    private SpriteRenderer display1, display2;
 
     // Array populated in inspector
     public GameObject[] objects;
@@ -61,14 +65,18 @@ public class GetGiftsManager : MonoBehaviour
         int gameManagerScore = gameManager.GetScore();
 
         // If user is in the first round of games
-        if (gameManagerScore <= 6)
+        if (gameManagerScore <= 5)
         {
             // Get and populate 1 random gift game object to the objectsToGet dictionary
             GameObject g = objects[Random.Range(0, 5)];
             objectsToGet.Add(g.name, g);
+
+            // Sets the display object sprites and enabled their sprite renderer
+            display1.sprite = g.GetComponent<SpriteRenderer>().sprite;
+            display1.enabled = true;
         }
         // If user is in the second round of games
-        else if (gameManagerScore <= 12)
+        else if (gameManagerScore <= 11)
         {
             // Get 2 random gift game objects
             GameObject g1 = objects[Random.Range(0, 5)];
@@ -83,6 +91,12 @@ public class GetGiftsManager : MonoBehaviour
             // Add the game objects to the objectsToGet dictionary
             objectsToGet.Add(g1.name, g1);
             objectsToGet.Add(g2.name, g2);
+
+            // Sets the display object sprites and enabled their sprite renderer
+            display1.sprite = g1.GetComponent<SpriteRenderer>().sprite;
+            display2.sprite = g2.GetComponent<SpriteRenderer>().sprite;
+            display1.enabled = true;
+            display2.enabled = true;
         }
     }
 
