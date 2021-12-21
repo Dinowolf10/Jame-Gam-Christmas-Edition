@@ -15,6 +15,7 @@ public class DecorateTreeManager : MonoBehaviour
 
     // References
     private Timer timer;
+    private GameManager gameManager;
 
     // Collections
     private List<GameObject> ornaments = new List<GameObject>();
@@ -32,7 +33,9 @@ public class DecorateTreeManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         timer = timerPrefab.GetComponent<Timer>();
 
         SpawnOrnaments();
@@ -48,12 +51,16 @@ public class DecorateTreeManager : MonoBehaviour
         if (isGameWon && !isTimeUp)
         {
             timer.StopBarDrain();
-            Debug.Log("WIN");
+            gameManager.SetGameResult(2);
+            gameManager.IncrementScore();
+            gameManager.LoadBetweenScene();
         }
 
         if (isTimeUp && !isGameWon)
         {
-            Debug.Log("LOSE");
+            gameManager.SetGameResult(1);
+            gameManager.DeductLife();
+            gameManager.LoadBetweenScene();
         }
     }
 
