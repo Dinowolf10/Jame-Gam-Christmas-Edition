@@ -22,6 +22,7 @@ public class CleanHouseSceneManager : MonoBehaviour
     private GameObject dirt;
     private bool isGameWon = false;
     private bool isTimeUp = false;
+    private bool isWaiting = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,15 +39,17 @@ public class CleanHouseSceneManager : MonoBehaviour
     {
         CheckTime();
 
-        if (dirt.transform.childCount == 0 && !isTimeUp)
+        if (dirt.transform.childCount == 0 && !isTimeUp && !isWaiting)
         {
+            isWaiting = true;
             isGameWon = true;
             timer.StopBarDrain();
             gameManager.WonMiniGame();
         }
 
-        if (isTimeUp && !isGameWon)
+        if (isTimeUp && !isGameWon && !isWaiting)
         {
+            isWaiting = true;
             gameManager.LostMiniGame();
         }
     }

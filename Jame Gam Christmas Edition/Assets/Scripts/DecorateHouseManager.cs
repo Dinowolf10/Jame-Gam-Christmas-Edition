@@ -23,6 +23,7 @@ public class DecorateHouseManager : MonoBehaviour
     // Variables
     private bool isGameWon = false;
     private bool isTimeUp = false;
+    private bool isWaiting = false;
     [SerializeField] float lightShuffleVariability;
 
     // Start is called before the first frame update
@@ -44,14 +45,16 @@ public class DecorateHouseManager : MonoBehaviour
 
         CheckTime();
 
-        if (isGameWon && !isTimeUp)
+        if (isGameWon && !isTimeUp && !isWaiting)
         {
+            isWaiting = true;
             timer.StopBarDrain();
             gameManager.WonMiniGame();
         }
 
         if (isTimeUp && !isGameWon)
         {
+            isWaiting = true;
             gameManager.LostMiniGame();
         }
     }

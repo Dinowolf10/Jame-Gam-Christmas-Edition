@@ -21,6 +21,7 @@ public class GetGiftsManager : MonoBehaviour
     private GameManager gameManager;
 
     private bool hasWon = false;
+    private bool isWaiting = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -41,8 +42,9 @@ public class GetGiftsManager : MonoBehaviour
         }
 
         // Checks if timer is up
-        if (timer.IsTimeUp() && !hasWon)
+        if (timer.IsTimeUp() && !hasWon && !isWaiting)
         {
+            isWaiting = true;
             gameManager.LostMiniGame();
         }
     }
@@ -74,8 +76,9 @@ public class GetGiftsManager : MonoBehaviour
 
                 Debug.Log("Got Object!");
 
-                if (objectsToGet.Count == 0)
+                if (objectsToGet.Count == 0 && !isWaiting)
                 {
+                    isWaiting = true;
                     timer.StopBarDrain();
                     gameManager.WonMiniGame();
                     hasWon = true;
