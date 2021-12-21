@@ -16,6 +16,7 @@ public class CleanHouseSceneManager : MonoBehaviour
 
     // References
     private Timer timer;
+    private GameManager gameManager;
 
     // Variables
     private GameObject dirt;
@@ -25,7 +26,10 @@ public class CleanHouseSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         dirt = Instantiate(dirtPrefab, Vector3.zero, Quaternion.identity);
+        
         timer = timerPrefab.GetComponent<Timer>();
     }
 
@@ -38,12 +42,12 @@ public class CleanHouseSceneManager : MonoBehaviour
         {
             isGameWon = true;
             timer.StopBarDrain();
-            Debug.Log("WIN");
+            gameManager.WonMiniGame();
         }
 
         if (isTimeUp && !isGameWon)
         {
-            Debug.Log("LOSE");
+            gameManager.LostMiniGame();
         }
     }
 

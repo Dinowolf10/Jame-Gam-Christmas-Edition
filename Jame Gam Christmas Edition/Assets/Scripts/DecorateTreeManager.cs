@@ -51,16 +51,12 @@ public class DecorateTreeManager : MonoBehaviour
         if (isGameWon && !isTimeUp)
         {
             timer.StopBarDrain();
-            gameManager.SetGameResult(2);
-            gameManager.IncrementScore();
-            gameManager.LoadBetweenScene();
+            gameManager.WonMiniGame();
         }
 
         if (isTimeUp && !isGameWon)
         {
-            gameManager.SetGameResult(1);
-            gameManager.DeductLife();
-            gameManager.LoadBetweenScene();
+            gameManager.LostMiniGame();
         }
     }
 

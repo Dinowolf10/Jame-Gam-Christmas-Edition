@@ -16,9 +16,13 @@ public class ChoppingFoodManager : MonoBehaviour
 
     private bool isCutting = false;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         ThrowFoodUp();
     }
 
@@ -68,7 +72,7 @@ public class ChoppingFoodManager : MonoBehaviour
 
                 if (foods.Count == 0)
                 {
-                    Debug.Log("You Win!");
+                    gameManager.WonMiniGame();
                 }
             }
         }

@@ -18,6 +18,7 @@ public class DecorateHouseManager : MonoBehaviour
 
     // References
     private Timer timer;
+    private GameManager gameManager;
 
     // Variables
     private bool isGameWon = false;
@@ -27,6 +28,8 @@ public class DecorateHouseManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         timer = timerPrefab.GetComponent<Timer>();
 
         lightJoints[0].transform.position = lightFixtures[0].transform.position;
@@ -44,12 +47,12 @@ public class DecorateHouseManager : MonoBehaviour
         if (isGameWon && !isTimeUp)
         {
             timer.StopBarDrain();
-            Debug.Log("WIN");
+            gameManager.WonMiniGame();
         }
 
         if (isTimeUp && !isGameWon)
         {
-            Debug.Log("LOSE");
+            gameManager.LostMiniGame();
         }
     }
 

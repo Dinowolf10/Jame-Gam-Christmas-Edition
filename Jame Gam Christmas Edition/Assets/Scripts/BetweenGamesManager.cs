@@ -28,6 +28,7 @@ public class BetweenGamesManager : MonoBehaviour
 
         numLives = gameManager.GetLives();
 
+        // Adjust the number of hats (lives) displayed based on the player's life count
         if (numLives == 3)
         {
             hats[3].SetActive(false);

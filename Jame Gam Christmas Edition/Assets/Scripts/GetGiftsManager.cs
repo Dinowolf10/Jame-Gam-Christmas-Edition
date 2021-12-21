@@ -10,10 +10,6 @@ public class GetGiftsManager : MonoBehaviour
 
     // Reference stored in inspector
     [SerializeField]
-    private GameObject gameManager;
-
-    // Reference stored in inspector
-    [SerializeField]
     private Timer timer;
 
     // Array populated in inspector
@@ -22,11 +18,15 @@ public class GetGiftsManager : MonoBehaviour
     // Populated at start
     public Dictionary<string, GameObject> objectsToGet = new Dictionary<string, GameObject>();
 
+    private GameManager gameManager;
+
     private bool hasWon = false;
 
     // Start is called before the first frame update
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         // Populates objectsToGet
         PopulateObjectsToGet();
     }
@@ -43,7 +43,7 @@ public class GetGiftsManager : MonoBehaviour
         // Checks if timer is up
         if (timer.IsTimeUp() && !hasWon)
         {
-            Debug.Log("You Lose!");
+            gameManager.LostMiniGame();
         }
     }
 
@@ -77,7 +77,7 @@ public class GetGiftsManager : MonoBehaviour
                 if (objectsToGet.Count == 0)
                 {
                     timer.StopBarDrain();
-                    Debug.Log("You Win!");
+                    gameManager.WonMiniGame();
                     hasWon = true;
                 }
             }

@@ -20,6 +20,8 @@ public class StirringManager : MonoBehaviour
     [SerializeField]
     private StirPoint[] stirPoints;
 
+    private GameManager gameManager;
+
     private StirPoint activePoint;
     private Renderer activePointRenderer;
 
@@ -35,6 +37,8 @@ public class StirringManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         // Hides all points
         for (int i = 0; i < stirPoints.Length; i++)
         {
@@ -56,15 +60,13 @@ public class StirringManager : MonoBehaviour
         if (score >= targetScore)
         {
             timer.StopBarDrain();
-            Debug.Log("You Win!");
-            return;
+            gameManager.WonMiniGame();
         }
 
         // If time runs out, player loses
         if (timer.IsTimeUp())
         {
-            Debug.Log("You Lose!");
-            return;
+            gameManager.LostMiniGame();
         }
 
         // Updates mouse position
