@@ -420,8 +420,8 @@ Canvas:
   m_GameObject: {fileID: 788788684}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 628196144}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -550,6 +550,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: ddf8ec16d078fd647a3af00809df5765, type: 3}
+    - target: {fileID: 647367044582559056, guid: cabd4553828e85348af335671be65b4d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 647367044582559057, guid: cabd4553828e85348af335671be65b4d, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -655,6 +659,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b3c916f0c3ac6cf448050c5a3320078e, type: 3}
+    - target: {fileID: 647367044582559056, guid: cabd4553828e85348af335671be65b4d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 647367044582559057, guid: cabd4553828e85348af335671be65b4d, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -760,6 +768,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: c5fa8c9da9d19b844aba5561ebdb375a, type: 3}
+    - target: {fileID: 647367044582559056, guid: cabd4553828e85348af335671be65b4d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 647367044582559057, guid: cabd4553828e85348af335671be65b4d, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -865,6 +877,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 544aea68c8533bd41a1fa8a7381a6e4e, type: 3}
+    - target: {fileID: 647367044582559056, guid: cabd4553828e85348af335671be65b4d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 647367044582559057, guid: cabd4553828e85348af335671be65b4d, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -926,6 +942,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 616233207, guid: cabd4553828e85348af335671be65b4d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 616233207, guid: cabd4553828e85348af335671be65b4d, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.32
+      objectReference: {fileID: 0}
     - target: {fileID: 1987725513, guid: cabd4553828e85348af335671be65b4d, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -962,6 +986,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 3961ab56a53b11143a585fb4aab9da65, type: 3}
+    - target: {fileID: 647367044582559056, guid: cabd4553828e85348af335671be65b4d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 647367044582559057, guid: cabd4553828e85348af335671be65b4d, type: 3}
       propertyPath: m_RootOrder
       value: 2
