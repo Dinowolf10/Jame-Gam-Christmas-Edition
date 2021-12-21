@@ -52,7 +52,7 @@ public class DecorateHouseManager : MonoBehaviour
             gameManager.WonMiniGame();
         }
 
-        if (isTimeUp && !isGameWon)
+        if (isTimeUp && !isGameWon && !isWaiting)
         {
             isWaiting = true;
             gameManager.LostMiniGame();
@@ -91,6 +91,7 @@ public class DecorateHouseManager : MonoBehaviour
     private void CheckLightPositions()
     {
         bool isComplete = true;
+        Vector3 newPos;
 
         for (int i = 0; i < lightJoints.Count; i++)
         {
@@ -104,7 +105,8 @@ public class DecorateHouseManager : MonoBehaviour
             if (Mathf.Abs(lightJoints[i].transform.position.x - lightFixtures[i].transform.position.x) < 0.5f &&
                 Mathf.Abs(lightJoints[i].transform.position.y - lightFixtures[i].transform.position.y) < 0.5f)
             {
-                lightJoints[i].transform.position = lightFixtures[i].transform.position;
+                newPos = lightFixtures[i].transform.position;
+                lightJoints[i].transform.position = new Vector3(newPos.x, newPos.y - 0.25f, newPos.z);
                 lightJoints[i].GetComponent<MoveLightJoint>().LockLight();
                 lightFixtures[i].GetComponent<SpriteRenderer>().color = Color.green;
             }

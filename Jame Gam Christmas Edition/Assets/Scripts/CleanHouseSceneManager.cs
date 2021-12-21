@@ -15,6 +15,9 @@ public class CleanHouseSceneManager : MonoBehaviour
     [SerializeField] GameObject timerPrefab;
 
     // References
+    [SerializeField] GameObject vacuumSprite;
+    [SerializeField] GameObject sparkle1;
+    [SerializeField] GameObject sparkle2;
     private Timer timer;
     private GameManager gameManager;
 
@@ -39,9 +42,11 @@ public class CleanHouseSceneManager : MonoBehaviour
     {
         CheckTime();
 
+        UpdateVacuumPosition();
+
         if (dirt.transform.childCount == 0 && !isTimeUp && !isWaiting)
         {
-
+            ActivateSparkles();
             isWaiting = true;
             isGameWon = true;
             timer.StopBarDrain();
@@ -55,6 +60,22 @@ public class CleanHouseSceneManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the position of the vacuum sprite to follow the player's cursor
+    /// </summary>
+    private void UpdateVacuumPosition()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 newPos = new Vector3(mousePos.x, mousePos.y, 0);
+        vacuumSprite.transform.position = newPos;
+    }
+
+    private void ActivateSparkles()
+    {
+        sparkle1.SetActive(true);
+        sparkle2.SetActive(true);
+    }
+ 
     /// <summary>
     /// Checks if the timer has run out 
     /// </summary>

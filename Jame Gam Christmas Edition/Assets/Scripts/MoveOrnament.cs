@@ -50,7 +50,7 @@ public class MoveOrnament : MonoBehaviour
     /// </summary>
     private void OnMouseUp()
     {
-        transform.position = new Vector2(mousePosition.x, mousePosition.y);
+        // if off screen, place back at OG location
     }
 
     /// <summary>
