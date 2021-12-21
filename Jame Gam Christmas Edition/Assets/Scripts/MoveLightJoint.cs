@@ -52,7 +52,10 @@ public class MoveLightJoint : MonoBehaviour
     /// </summary>
     private void OnMouseUp()
     {
-        // if off screen, place back at OG location
+        if (!GetComponent<Renderer>().isVisible)
+        {
+            transform.position = initialPosition;
+        }
     }
 
     /// <summary>
