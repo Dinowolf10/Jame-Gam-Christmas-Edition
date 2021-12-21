@@ -11,7 +11,6 @@ public class MoveOrnament : MonoBehaviour
 {
     // References
     [SerializeField] GameObject tree;
-    private SpriteRenderer treeSprite;
 
     // Vectors
     private Vector2 initialPosition;
@@ -19,27 +18,12 @@ public class MoveOrnament : MonoBehaviour
 
     // Variables
     private float deltaX, deltaY;
-    private bool onTree = false;
     private bool locked = false;
-
-    private float minX;
-    private float maxX;
-    private float minY;
-    private float maxY;
 
     // Start is called before the first frame update
     void Start()
     {
         initialPosition = transform.position;
-        treeSprite = tree.GetComponent<SpriteRenderer>();
-
-        DefineBounds();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        CheckOnTree();
     }
 
     /// <summary>
@@ -47,11 +31,8 @@ public class MoveOrnament : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
-        if (!locked)
-        {
-            deltaX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
-            deltaY = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
-        }
+        deltaX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
+        deltaY = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
     }
     
     /// <summary>
@@ -59,11 +40,9 @@ public class MoveOrnament : MonoBehaviour
     /// </summary>
     private void OnMouseDrag()
     {
-        if (!locked)
-        {
-            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = new Vector2(mousePosition.x - deltaX, mousePosition.y - deltaY);
-        }
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = new Vector2(mousePosition.x - deltaX, mousePosition.y - deltaY);
+
     }
 
     /// <summary>
@@ -71,40 +50,7 @@ public class MoveOrnament : MonoBehaviour
     /// </summary>
     private void OnMouseUp()
     {
-        if (onTree)
-        {
-            transform.position = new Vector2(mousePosition.x, mousePosition.y);
-            locked = true;
-        } 
-        else
-        {
-            transform.position = new Vector2(initialPosition.x, initialPosition.y);
-        }
-    }
-
-    /// <summary>
-    /// Determines if the ornament is within the bound of the tree
-    /// </summary>
-    private void CheckOnTree()
-    {
-        if (transform.position.x > minX && 
-            transform.position.x < maxX &&
-            transform.position.y > minY && 
-            transform.position.y < maxY)
-        {
-            onTree = true;
-        }
-    }
-
-    /// <summary>
-    /// Defines the bounds of the tree
-    /// </summary>
-    private void DefineBounds()
-    {
-        minX = tree.transform.position.x - treeSprite.bounds.extents.x;
-        maxX = tree.transform.position.x + treeSprite.bounds.extents.x;
-        minY = tree.transform.position.y - treeSprite.bounds.extents.y;
-        maxY = tree.transform.position.y + treeSprite.bounds.extents.y;
+        transform.position = new Vector2(mousePosition.x, mousePosition.y);
     }
 
     /// <summary>
@@ -114,5 +60,13 @@ public class MoveOrnament : MonoBehaviour
     public bool isLocked()
     {
         return locked;
+    }
+
+    /// <summary>
+    /// Locks the ornament from being picked up
+    /// </summary>
+    public void LockOrnament()
+    {
+        locked = true;
     }
 }

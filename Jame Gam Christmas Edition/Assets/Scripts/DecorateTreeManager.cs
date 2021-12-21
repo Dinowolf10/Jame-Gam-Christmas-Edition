@@ -18,6 +18,8 @@ public class DecorateTreeManager : MonoBehaviour
 
     // Collections
     private List<GameObject> ornaments = new List<GameObject>();
+    [SerializeField] List<GameObject> treeBlocks = new List<GameObject>();
+    [SerializeField] List<Sprite> sprites = new List<Sprite>();
 
     // Variables
     private bool isGameWon = false;
@@ -39,8 +41,8 @@ public class DecorateTreeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckOrnamentPlacement();
         CheckComplete();
-
         CheckTime();
 
         if (isGameWon && !isTimeUp)
@@ -63,6 +65,7 @@ public class DecorateTreeManager : MonoBehaviour
         for (int i = 0; i < numOrnaments; i++)
         {
             newOrnament = Instantiate(ornamentPrefab, RandomSpawnLocation(), Quaternion.identity);
+            newOrnament.GetComponent<SpriteRenderer>().sprite = ChooseRandomSprite();
             ornaments.Add(newOrnament);
         }
     }
@@ -77,6 +80,68 @@ public class DecorateTreeManager : MonoBehaviour
         float YPos = Random.Range(startingY - spawnVariability, startingY + spawnVariability);
 
         return new Vector2(XPos, YPos);
+    }
+
+    private Sprite ChooseRandomSprite()
+    {
+        int idx = Random.Range(0, sprites.Count - 1);
+
+        return sprites[idx];
+    }
+
+    private void CheckOrnamentPlacement()
+    {
+        for (int i = 0; i < ornaments.Count; i++)
+        {
+            for (int j = 0; j < treeBlocks.Count; j++)
+            {
+                if (AABBCollision(ornaments[i], treeBlocks[j]))
+                {
+                    ornaments[i].GetComponent<MoveOrnament>().LockOrnament();
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Checks for a collision between two objects using the AABB method
+    /// </summary>
+    /// <param name="o1">First game object being considered for a collision</param>
+    /// <param name="o2">Second game object being considered for a collision</param>
+    /// <returns>boolean determining whether a collision has occurred</returns>
+    public bool AABBCollision(GameObject o1, GameObject o2)
+    {
+        // Get references to bounds of both objects
+        Bounds bounds1 = o1.GetComponent<SpriteRenderer>().bounds;
+        Bounds bounds2 = o2.GetComponent<SpriteRenderer>().bounds;
+
+        // Find all mins and maxes of o1
+        float minX1 = bounds1.min.x;
+        float maxX1 = bounds1.max.x;
+        float minY1 = bounds1.min.y;
+        float maxY1 = bounds1.max.y;
+
+        // Find all mins and maxes of o2
+        float minX2 = bounds2.min.x;
+        float maxX2 = bounds2.max.x;
+        float minY2 = bounds2.min.y;
+        float maxY2 = bounds2.max.y;
+
+        // Check all necessary conditions for a collision
+        bool cond1 = minX2 < maxX1;
+        bool cond2 = maxX2 > minX1;
+        bool cond3 = maxY2 > minY1;
+        bool cond4 = minY2 < maxY1;
+
+        // Determine if collision has occurred
+        if (cond1 && cond2 && cond3 && cond4)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /// <summary>
