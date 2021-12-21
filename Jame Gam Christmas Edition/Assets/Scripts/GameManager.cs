@@ -10,6 +10,9 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    // Collections
+    private HashSet<int> playedScenes = new HashSet<int>();
+
     // Variables
     private int gameResult;
     private int numLives;
@@ -26,10 +29,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
             betweenTimer = betweenWaitTime;
-        }
     }
 
     // Update is called once per frame
@@ -44,18 +44,40 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Going in with timer = " + betweenTimer.ToString());
+                Debug.Log(betweenTimer);
                 betweenTimer = betweenWaitTime;
-                SceneManager.LoadScene(Random.Range(1, 6));
-                //SceneManager.LoadScene(3);
+                LoadNextScene();
             }
         }
+    }
+
+    private void LoadNextScene()
+    {
+        int idx;
+
+        // If all games have been played, reset the played games tracker
+        if (playedScenes.Count == 6)
+        {
+            playedScenes.Clear();
+        }
+
+        // Find the index of a game that hasn't been played yet
+        while (playedScenes.Contains(idx = Random.Range(2, 8)))
+        {
+            continue;
+        }
+
+        // Add the scene index to the list of played games
+        playedScenes.Add(idx);
+
+        // Load the new game
+        SceneManager.LoadScene(idx);
     }
 
     /// <summary>
     /// Loads the scene that is displayed between mini games
     /// </summary>
-    public void LoadBetweenScene()
+    private void LoadBetweenScene()
     {
         SceneManager.LoadScene(1);
     }
