@@ -25,6 +25,7 @@ public class DecorateTreeManager : MonoBehaviour
     // Variables
     private bool isGameWon = false;
     private bool isTimeUp = false;
+    private bool isWaiting = false;
     private GameObject newOrnament;
     [SerializeField] float startingX;
     [SerializeField] float startingY;
@@ -48,14 +49,16 @@ public class DecorateTreeManager : MonoBehaviour
         CheckComplete();
         CheckTime();
 
-        if (isGameWon && !isTimeUp)
+        if (isGameWon && !isTimeUp && !isWaiting)
         {
+            isWaiting = true;
             timer.StopBarDrain();
             gameManager.WonMiniGame();
         }
 
-        if (isTimeUp && !isGameWon)
+        if (isTimeUp && !isGameWon && !isWaiting)
         {
+            isWaiting = true;
             gameManager.LostMiniGame();
         }
     }

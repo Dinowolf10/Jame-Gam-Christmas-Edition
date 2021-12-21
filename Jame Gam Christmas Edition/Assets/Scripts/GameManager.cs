@@ -87,16 +87,27 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void WonMiniGame()
     {
+        StartCoroutine(WinPause());
+    }
+
+    IEnumerator WinPause()
+    {
+        yield return new WaitForSeconds(2f);
         SetGameResult(2);
         IncrementScore();
         LoadBetweenScene();
     }
-
     /// <summary>
     /// Adjusts game state based on a player losing a mini game
     /// </summary>
     public void LostMiniGame()
     {
+        StartCoroutine(LosePause());
+    }
+
+    IEnumerator LosePause()
+    {
+        yield return new WaitForSeconds(2f);
         SetGameResult(1);
         DeductLife();
         LoadBetweenScene();

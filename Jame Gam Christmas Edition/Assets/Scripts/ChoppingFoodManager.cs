@@ -15,6 +15,7 @@ public class ChoppingFoodManager : MonoBehaviour
     private List<Rigidbody2D> foods;
 
     private bool isCutting = false;
+    private bool isWaiting = false;
 
     private GameManager gameManager;
 
@@ -70,8 +71,9 @@ public class ChoppingFoodManager : MonoBehaviour
 
                 foods.Remove(hit.transform.GetComponent<Rigidbody2D>());
 
-                if (foods.Count == 0)
+                if (foods.Count == 0 && !isWaiting)
                 {
+                    isWaiting = true;
                     gameManager.WonMiniGame();
                 }
             }

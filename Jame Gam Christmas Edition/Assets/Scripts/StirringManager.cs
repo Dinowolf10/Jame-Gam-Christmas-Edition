@@ -29,6 +29,8 @@ public class StirringManager : MonoBehaviour
 
     private int score = 0;
 
+    private bool isWaiting = false;
+
     [SerializeField]
     private int targetScore = 100;
 
@@ -57,15 +59,17 @@ public class StirringManager : MonoBehaviour
     private void Update()
     {
         // If player reaches target score, they win
-        if (score >= targetScore)
+        if (score >= targetScore && !isWaiting)
         {
+            isWaiting = true;
             timer.StopBarDrain();
             gameManager.WonMiniGame();
         }
 
         // If time runs out, player loses
-        if (timer.IsTimeUp())
+        if (timer.IsTimeUp() && !isWaiting)
         {
+            isWaiting = true;
             gameManager.LostMiniGame();
         }
 
