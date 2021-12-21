@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
     // Variables
     private int gameResult;
     private int numLives;
-    private int score;
+    private int score = 0;
+    private int roundNumber = 0;
     [SerializeField] float betweenWaitTime;
     private float betweenTimer;
 
@@ -43,23 +44,34 @@ public class GameManager : MonoBehaviour
         {
             if (betweenTimer > 0)
             {
-                //Debug.Log(betweenTimer);
                 betweenTimer -= Time.deltaTime;
             }
             else
             {
-                //Debug.Log(betweenTimer);
+                Debug.Log(numLives);
 
                 // Resets mouse state to normal
                 mouseCursor.ResetMouseState();
 
                 betweenTimer = betweenWaitTime;
 
-                LoadNextScene();
+                // If the player runs out of lives, load the game over scene
+                if (numLives == 0)
+                {
+                    SceneManager.LoadScene(8);
+                }
+                else
+                {
+                    // Otherwise, load another mini game
+                    LoadNextScene();
+                }
             }
         }
     }
 
+    /// <summary>
+    /// Picks and loads a new game that hasn't been played in this sequence
+    /// </summary>
     private void LoadNextScene()
     {
         // Resets mouse state to normal
@@ -71,6 +83,7 @@ public class GameManager : MonoBehaviour
         if (playedScenes.Count == 6)
         {
             playedScenes.Clear();
+            roundNumber++;
         }
 
         // Find the index of a game that hasn't been played yet

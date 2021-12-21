@@ -48,7 +48,7 @@ public class MoveLightJoint : MonoBehaviour
     }
 
     /// <summary>
-    /// Drops the joint at its current location when the mouse is unclicked
+    /// Moves joint back to initial position if placed off screen
     /// </summary>
     private void OnMouseUp()
     {

@@ -46,7 +46,7 @@ public class MoveOrnament : MonoBehaviour
     }
 
     /// <summary>
-    /// Places the ornament on the tree, or moves it back to its original location
+    /// Moves ornament back to initial position if placed off screen
     /// </summary>
     private void OnMouseUp()
     {

@@ -5,9 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Reference grabbed in inspector
-    [SerializeField]
     private MouseCursor mouseCursor;
+
+    private void Start()
+    {
+        mouseCursor = GameObject.Find("MouseCursor").GetComponent<MouseCursor>();
+    }
 
     /// <summary>
     /// Starts the game by loading the next scene
@@ -19,5 +22,14 @@ public class MainMenu : MonoBehaviour
 
         // Loads the next scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void LoadMainMenu()
+    {
+        // Resets mouse state to normal
+        mouseCursor.ResetMouseState();
+
+        // Loads the main menu
+        SceneManager.LoadScene(0);
     }
 }
