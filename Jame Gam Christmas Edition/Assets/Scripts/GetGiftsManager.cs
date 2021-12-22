@@ -64,6 +64,8 @@ public class GetGiftsManager : MonoBehaviour
         // Stores gameManagerScore
         int gameManagerRound = gameManager.GetRoundNumber();
 
+        //int gameManagerRound = 2;
+
         // If user is in the first round of games
         if (gameManagerRound == 1)
         {
@@ -117,8 +119,10 @@ public class GetGiftsManager : MonoBehaviour
             // If the object hit is one of the objectsToGet
             if (objectsToGet.ContainsKey(name))
             {
+                hit.transform.GetChild(0).GetComponent<Animator>().SetBool("isSelected", true);
+
                 // Hide the hit object
-                objectsToGet[name].SetActive(false);
+                //objectsToGet[name].GetComponent<SpriteRenderer>().enabled = false;
 
                 // Remove the object from the objectsToGet dictionary
                 objectsToGet.Remove(name);
