@@ -66,6 +66,8 @@ public class WrapGiftsManager : MonoBehaviour
                 isComplete = false;
             }
 
+            AdjustWrappingPaperSide(i);
+
             // If this dragpoint has been properly placed, snap it in place and lock it
             if (Mathf.Abs(dragpoints[i].transform.position.x - midpoint.transform.position.x) < 0.5f &&
                 Mathf.Abs(dragpoints[i].transform.position.y - midpoint.transform.position.y) < 0.5f &&
@@ -74,7 +76,6 @@ public class WrapGiftsManager : MonoBehaviour
                 newPos = midpoint.transform.position;
                 dragpoints[i].transform.position = new Vector3(newPos.x, newPos.y, newPos.z);
                 dragpoints[i].GetComponent<Dragpoint>().LockDragpoint();
-                AdjustWrappingPaperSide(i);
             }
         }
 
@@ -84,26 +85,57 @@ public class WrapGiftsManager : MonoBehaviour
     private void AdjustWrappingPaperSide(int index)
     {
         Vector3 newPos;
+        float newPosCoord;
+        float newScale;
+        float distanceToMid;
 
         if (index == 0)
         {
-            newPos = new Vector3(wrappingPaperSides[index].transform.position.x - 1.11f, wrappingPaperSides[index].transform.position.y, wrappingPaperSides[index].transform.position.z);
+            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.x);
+            distanceToMid = Mathf.Clamp(distanceToMid, 0f, 2.22f);
+
+            newPosCoord = 0.5f * distanceToMid + 0.55f;
+            newPos = new Vector3(newPosCoord, wrappingPaperSides[index].transform.position.y, wrappingPaperSides[index].transform.position.z);
+            newScale = (distanceToMid - 1.11f) / 1.11f;
+
             wrappingPaperSides[index].transform.position = newPos;
+            wrappingPaperSides[index].GetComponent<SpriteRenderer>().size = new Vector2(newScale, 1);
         }
         else if (index == 1)
         {
-            newPos = new Vector3(wrappingPaperSides[index].transform.position.x, wrappingPaperSides[index].transform.position.y - 1.11f, wrappingPaperSides[index].transform.position.z);
+            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.y);
+            distanceToMid = Mathf.Clamp(distanceToMid, 0f, 2.22f);
+
+            newPosCoord = 0.5f * distanceToMid + 0.55f;
+            newPos = new Vector3(wrappingPaperSides[index].transform.position.x, newPosCoord, wrappingPaperSides[index].transform.position.z);
+            newScale = (distanceToMid - 1.11f) / 1.11f;
+
             wrappingPaperSides[index].transform.position = newPos;
+            wrappingPaperSides[index].GetComponent<SpriteRenderer>().size = new Vector2(1, newScale);
         }
         else if (index == 2)
         {
-            newPos = new Vector3(wrappingPaperSides[index].transform.position.x + 1.11f, wrappingPaperSides[index].transform.position.y, wrappingPaperSides[index].transform.position.z);
+            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.x);
+            distanceToMid = Mathf.Clamp(distanceToMid, 0f, 2.22f);
+
+            newPosCoord = 0.5f * distanceToMid + 0.55f;
+            newPos = new Vector3(-newPosCoord, wrappingPaperSides[index].transform.position.y, wrappingPaperSides[index].transform.position.z);
+            newScale = (distanceToMid - 1.11f) / 1.11f;
+
             wrappingPaperSides[index].transform.position = newPos;
+            wrappingPaperSides[index].GetComponent<SpriteRenderer>().size = new Vector2(newScale, 1);
         }
         else if (index == 3)
         {
-            newPos = new Vector3(wrappingPaperSides[index].transform.position.x, wrappingPaperSides[index].transform.position.y + 1.11f, wrappingPaperSides[index].transform.position.z);
+            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.y);
+            distanceToMid = Mathf.Clamp(distanceToMid, 0f, 2.22f);
+
+            newPosCoord = 0.5f * distanceToMid + 0.55f;
+            newPos = new Vector3(wrappingPaperSides[index].transform.position.x, -newPosCoord, wrappingPaperSides[index].transform.position.z);
+            newScale = (distanceToMid - 1.11f) / 1.11f;
+
             wrappingPaperSides[index].transform.position = newPos;
+            wrappingPaperSides[index].GetComponent<SpriteRenderer>().size = new Vector2(1, newScale);
         }
     }
 
