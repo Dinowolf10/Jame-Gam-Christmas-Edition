@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
                 // If the player runs out of lives, load the game over scene
                 if (numLives == 0)
                 {
-                    SceneManager.LoadScene(8);
+                    SceneManager.LoadScene(9);
                 }
                 else
                 {
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         int idx;
 
         // If all games have been played, reset the played games tracker and increment the round
-        if (playedScenes.Count == 6)
+        if (playedScenes.Count == 7)
         {
             playedScenes.Clear();
             roundNumber++;
@@ -89,13 +89,13 @@ public class GameManager : MonoBehaviour
         // If the player has completed two rounds, then they win
         if (roundNumber == 3)
         {
-            SceneManager.LoadScene(9);
+            SceneManager.LoadScene(10);
         }
         // Otherwise, load the next mini game
         else
         {
             // Find the index of a game that hasn't been played yet
-            while (playedScenes.Contains(idx = Random.Range(2, 8)))
+            while (playedScenes.Contains(idx = Random.Range(2, 9)))
             {
                 continue;
             }

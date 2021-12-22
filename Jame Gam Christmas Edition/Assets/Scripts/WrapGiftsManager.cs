@@ -10,14 +10,14 @@ using UnityEngine;
 public class WrapGiftsManager : MonoBehaviour
 {
     // Prefabs
+    [SerializeField] GameObject giftPrefab;
     [SerializeField] GameObject timerPrefab;
 
-    // References
-    [SerializeField] GameObject midpoint;
-
     // Collections
-    [SerializeField] List<GameObject> dragpoints;
-    [SerializeField] List<GameObject> wrappingPaperSides;
+    [SerializeField] private List<GameObject> gifts = new List<GameObject>();
+    [SerializeField] private List<GameObject> midpoints = new List<GameObject>();
+    [SerializeField] private List<GameObject> dragpoints = new List<GameObject>();
+    [SerializeField] private List<GameObject> wrappingPaperSides = new List<GameObject>();
 
     private Timer timer;
     private GameManager gameManager;
@@ -30,9 +30,65 @@ public class WrapGiftsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         timer = timerPrefab.GetComponent<Timer>();
+
+        GameObject gift;
+
+        if (gameManager.GetRoundNumber() == 1)
+        {
+            gift = (Instantiate(giftPrefab, Vector3.zero, Quaternion.identity));
+
+            midpoints.Add(gift.transform.GetChild(6).gameObject);
+
+            for (int i = 2; i < 6; i++)
+            {
+                wrappingPaperSides.Add(gift.transform.GetChild(i).gameObject);
+            }
+
+            for (int i = 7; i < 11; i++)
+            {
+                dragpoints.Add(gift.transform.GetChild(i).gameObject);
+            }
+
+            gifts.Add(gift);
+
+        }
+        else
+        {
+            gift = Instantiate(giftPrefab, new Vector3(-2.5f, 0f, 0f), Quaternion.identity);
+
+            midpoints.Add(gift.transform.GetChild(6).gameObject);
+
+            for (int i = 2; i < 6; i++)
+            {
+                wrappingPaperSides.Add(gift.transform.GetChild(i).gameObject);
+            }
+
+            for (int i = 7; i < 11; i++)
+            {
+                dragpoints.Add(gift.transform.GetChild(i).gameObject);
+            }
+
+            gifts.Add(gift);
+
+            gift = Instantiate(giftPrefab, new Vector3(2.5f, 0f, 0f), Quaternion.identity);
+
+            midpoints.Add(gift.transform.GetChild(6).gameObject);
+
+            for (int i = 2; i < 6; i++)
+            {
+                wrappingPaperSides.Add(gift.transform.GetChild(i).gameObject);
+            }
+
+            for (int i = 7; i < 11; i++)
+            {
+                dragpoints.Add(gift.transform.GetChild(i).gameObject);
+            }
+
+            gifts.Add(gift);
+        }
     }
 
     // Update is called once per frame
@@ -44,12 +100,15 @@ public class WrapGiftsManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp && !isWaiting)
         {
-            Debug.Log("WIN");
+            isWaiting = true;
+            timer.StopBarDrain();
+            gameManager.WonMiniGame();
         }
 
         if (isTimeUp && !isGameWon && !isWaiting)
         {
-            Debug.Log("LOSE");
+            isWaiting = true;
+            gameManager.LostMiniGame();
         }
     }
 
@@ -69,11 +128,11 @@ public class WrapGiftsManager : MonoBehaviour
             AdjustWrappingPaperSide(i);
 
             // If this dragpoint has been properly placed, snap it in place and lock it
-            if (Mathf.Abs(dragpoints[i].transform.position.x - midpoint.transform.position.x) < 0.5f &&
-                Mathf.Abs(dragpoints[i].transform.position.y - midpoint.transform.position.y) < 0.5f &&
+            if (Mathf.Abs(dragpoints[i].transform.position.x - midpoints[Mathf.Clamp(i - 3, 0, 1)].transform.position.x) < 0.5f &&
+                Mathf.Abs(dragpoints[i].transform.position.y - midpoints[Mathf.Clamp(i - 3, 0, 1)].transform.position.y) < 0.5f &&
                 !dragpoints[i].GetComponent<Dragpoint>().isLocked())
             {
-                newPos = midpoint.transform.position;
+                newPos = midpoints[Mathf.Clamp(i - 3, 0, 1)].transform.position;
                 dragpoints[i].transform.position = new Vector3(newPos.x, newPos.y, newPos.z);
                 dragpoints[i].GetComponent<Dragpoint>().LockDragpoint();
             }
@@ -89,49 +148,49 @@ public class WrapGiftsManager : MonoBehaviour
         float newScale;
         float distanceToMid;
 
-        if (index == 0)
+        if (index % 4 == 0)
         {
-            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.x);
+            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.x - midpoints[Mathf.Clamp(index - 3, 0, 1)].transform.position.x);
             distanceToMid = Mathf.Clamp(distanceToMid, 0f, 2.22f);
 
             newPosCoord = 0.5f * distanceToMid + 0.55f;
-            newPos = new Vector3(newPosCoord, wrappingPaperSides[index].transform.position.y, wrappingPaperSides[index].transform.position.z);
+            newPos = new Vector3(newPosCoord + midpoints[Mathf.Clamp(index - 3, 0, 1)].transform.position.x, wrappingPaperSides[index].transform.position.y, wrappingPaperSides[index].transform.position.z);
             newScale = (distanceToMid - 1.11f) / 1.11f;
 
             wrappingPaperSides[index].transform.position = newPos;
             wrappingPaperSides[index].GetComponent<SpriteRenderer>().size = new Vector2(newScale, 1);
         }
-        else if (index == 1)
+        else if (index % 4 == 1)
         {
-            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.y);
+            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.y - midpoints[Mathf.Clamp(index - 3, 0, 1)].transform.position.y);
             distanceToMid = Mathf.Clamp(distanceToMid, 0f, 2.22f);
 
             newPosCoord = 0.5f * distanceToMid + 0.55f;
-            newPos = new Vector3(wrappingPaperSides[index].transform.position.x, newPosCoord, wrappingPaperSides[index].transform.position.z);
+            newPos = new Vector3(wrappingPaperSides[index].transform.position.x, newPosCoord + midpoints[Mathf.Clamp(index - 3, 0, 1)].transform.position.y, wrappingPaperSides[index].transform.position.z);
             newScale = (distanceToMid - 1.11f) / 1.11f;
 
             wrappingPaperSides[index].transform.position = newPos;
             wrappingPaperSides[index].GetComponent<SpriteRenderer>().size = new Vector2(1, newScale);
         }
-        else if (index == 2)
+        else if (index % 4 == 2)
         {
-            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.x);
+            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.x - midpoints[Mathf.Clamp(index - 3, 0, 1)].transform.position.x);
             distanceToMid = Mathf.Clamp(distanceToMid, 0f, 2.22f);
 
             newPosCoord = 0.5f * distanceToMid + 0.55f;
-            newPos = new Vector3(-newPosCoord, wrappingPaperSides[index].transform.position.y, wrappingPaperSides[index].transform.position.z);
+            newPos = new Vector3(-newPosCoord + midpoints[Mathf.Clamp(index - 3, 0, 1)].transform.position.x, wrappingPaperSides[index].transform.position.y, wrappingPaperSides[index].transform.position.z);
             newScale = (distanceToMid - 1.11f) / 1.11f;
 
             wrappingPaperSides[index].transform.position = newPos;
             wrappingPaperSides[index].GetComponent<SpriteRenderer>().size = new Vector2(newScale, 1);
         }
-        else if (index == 3)
+        else if (index % 4 == 3)
         {
-            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.y);
+            distanceToMid = Mathf.Abs(dragpoints[index].transform.position.y - midpoints[Mathf.Clamp(index - 3, 0, 1)].transform.position.y);
             distanceToMid = Mathf.Clamp(distanceToMid, 0f, 2.22f);
 
             newPosCoord = 0.5f * distanceToMid + 0.55f;
-            newPos = new Vector3(wrappingPaperSides[index].transform.position.x, -newPosCoord, wrappingPaperSides[index].transform.position.z);
+            newPos = new Vector3(wrappingPaperSides[index].transform.position.x, -newPosCoord + midpoints[Mathf.Clamp(index - 3, 0, 1)].transform.position.y, wrappingPaperSides[index].transform.position.z);
             newScale = (distanceToMid - 1.11f) / 1.11f;
 
             wrappingPaperSides[index].transform.position = newPos;
