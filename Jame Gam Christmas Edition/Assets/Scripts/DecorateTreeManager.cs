@@ -14,6 +14,8 @@ public class DecorateTreeManager : MonoBehaviour
     [SerializeField] GameObject timerPrefab;
 
     // References
+    [SerializeField] GameObject sparkle1;
+    [SerializeField] GameObject sparkle2;
     private Timer timer;
     private GameManager gameManager;
 
@@ -30,7 +32,7 @@ public class DecorateTreeManager : MonoBehaviour
     [SerializeField] float startingX;
     [SerializeField] float startingY;
     [SerializeField] float spawnVariability;
-    [SerializeField] int numOrnaments;
+    private int numOrnaments;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +53,7 @@ public class DecorateTreeManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp && !isWaiting)
         {
+            ActivateSparkles();
             isWaiting = true;
             timer.StopBarDrain();
             gameManager.WonMiniGame();
@@ -68,6 +71,17 @@ public class DecorateTreeManager : MonoBehaviour
     /// </summary>
     private void SpawnOrnaments()
     {
+        int roundNumber = gameManager.GetRoundNumber();
+
+        if (roundNumber == 1)
+        {
+            numOrnaments = 3;
+        }
+        else if (roundNumber == 2)
+        {
+            numOrnaments = 5;
+        }
+
         for (int i = 0; i < numOrnaments; i++)
         {
             newOrnament = Instantiate(ornamentPrefab, RandomSpawnLocation(), Quaternion.identity);
@@ -167,6 +181,12 @@ public class DecorateTreeManager : MonoBehaviour
         }
 
         isGameWon = isComplete;
+    }
+
+    private void ActivateSparkles()
+    {
+        sparkle1.SetActive(true);
+        sparkle2.SetActive(true);
     }
 
     /// <summary>

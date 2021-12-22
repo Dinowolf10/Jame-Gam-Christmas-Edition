@@ -764,7 +764,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ff966131b7f7343a018f2e75a8786b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dirtPrefab: {fileID: 2647434861454915109, guid: 41ffb2a0e7b78a142893542728e1b237, type: 3}
+  dirtPrefabs:
+  - {fileID: 2647434861454915109, guid: 41ffb2a0e7b78a142893542728e1b237, type: 3}
+  - {fileID: 5610353839872946125, guid: 8790d26f7a6eb5e4da7eaa140d0a5efe, type: 3}
+  - {fileID: 2698178475682228173, guid: ad810a1d2b05a7f42bb6c1d9b9e1f76b, type: 3}
   dirtParticlePrefab: {fileID: 4339853721612816531, guid: 914e3736d64eb3b4fa0c79ff5f80ec84, type: 3}
   timerPrefab: {fileID: 634318145}
   vacuumSprite: {fileID: 991032237}

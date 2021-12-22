@@ -17,6 +17,8 @@ public class DecorateHouseManager : MonoBehaviour
     [SerializeField] GameObject timerPrefab;
 
     // References
+    [SerializeField] GameObject sparkle1;
+    [SerializeField] GameObject sparkle2;
     private Timer timer;
     private GameManager gameManager;
 
@@ -47,6 +49,7 @@ public class DecorateHouseManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp && !isWaiting)
         {
+            ActivateSparkles();
             isWaiting = true;
             timer.StopBarDrain();
             gameManager.WonMiniGame();
@@ -113,6 +116,12 @@ public class DecorateHouseManager : MonoBehaviour
         }
 
         isGameWon = isComplete;
+    }
+
+    private void ActivateSparkles()
+    {
+        sparkle1.SetActive(true);
+        sparkle2.SetActive(true);
     }
 
     /// <summary>

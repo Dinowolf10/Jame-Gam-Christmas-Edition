@@ -24,6 +24,9 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    /// <summary>
+    /// Load the main menu of the game
+    /// </summary>
     public void LoadMainMenu()
     {
         // Resets mouse state to normal

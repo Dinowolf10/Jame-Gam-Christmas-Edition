@@ -10,7 +10,7 @@ using UnityEngine;
 public class CleanHouseSceneManager : MonoBehaviour
 {
     // Prefabs
-    [SerializeField] GameObject dirtPrefab;
+    [SerializeField] List<GameObject> dirtPrefabs = new List<GameObject>();
     [SerializeField] GameObject dirtParticlePrefab;
     [SerializeField] GameObject timerPrefab;
 
@@ -32,7 +32,17 @@ public class CleanHouseSceneManager : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        dirt = Instantiate(dirtPrefab, Vector3.zero, Quaternion.identity);
+        int roundNumber = gameManager.GetRoundNumber();
+
+        if (roundNumber == 1)
+        {
+            dirt = Instantiate(dirtPrefabs[0], Vector3.zero, Quaternion.identity);
+        }
+        else
+        {
+            dirt = Instantiate(dirtPrefabs[Random.Range(0, 2)], Vector3.zero, Quaternion.identity);
+        }
+        
         
         timer = timerPrefab.GetComponent<Timer>();
     }
