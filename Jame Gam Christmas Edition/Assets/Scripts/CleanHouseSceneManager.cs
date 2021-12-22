@@ -40,7 +40,7 @@ public class CleanHouseSceneManager : MonoBehaviour
         }
         else
         {
-            dirt = Instantiate(dirtPrefabs[Random.Range(0, 2)], Vector3.zero, Quaternion.identity);
+            dirt = Instantiate(dirtPrefabs[Random.Range(1, 3)], Vector3.zero, Quaternion.identity);
         }
         
         
