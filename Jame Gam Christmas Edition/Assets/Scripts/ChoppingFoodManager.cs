@@ -14,6 +14,13 @@ public class ChoppingFoodManager : MonoBehaviour
     [SerializeField]
     private List<Rigidbody2D> foods;
 
+    // Populated in editor
+    [SerializeField]
+    private List<Rigidbody2D> santaHats;
+    
+    [SerializeField]
+    private List<Rigidbody2D> foodsToChop;
+
     private bool isCutting = false;
     private bool isWaiting = false;
 
@@ -30,6 +37,11 @@ public class ChoppingFoodManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (isWaiting)
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             isCutting = true;
@@ -47,7 +59,30 @@ public class ChoppingFoodManager : MonoBehaviour
 
     private void ThrowFoodUp()
     {
-        foods[0].AddForce(Vector2.up * throwForce, ForceMode2D.Impulse);
+        int roundNumber = gameManager.GetRoundNumber();
+        int i = 0;
+        Rigidbody2D f;
+
+        if (roundNumber == 1)
+        {
+            i = 2;
+        }
+        else if (roundNumber == 2)
+        {
+            i = 4;
+        }
+
+        while (i > 0)
+        {
+            santaHats[i - 1].AddForce(new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(0.75f, 1.2f) * throwForce), ForceMode2D.Impulse);
+
+            f = foods[Random.Range(0, foods.Count)];
+            f.AddForce(new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(0.75f, 1.1f) * throwForce), ForceMode2D.Impulse);
+            Debug.Log(f.name);
+            foodsToChop.Add(f);
+            foods.Remove(f);
+            i--;
+        }
     }
 
     /// <summary>
@@ -69,14 +104,32 @@ public class ChoppingFoodManager : MonoBehaviour
 
                 hit.transform.GetComponent<Renderer>().enabled = false;
 
-                foods.Remove(hit.transform.GetComponent<Rigidbody2D>());
+                foodsToChop.Remove(hit.transform.GetComponent<Rigidbody2D>());
 
-                if (foods.Count == 0 && !isWaiting)
+                if (foodsToChop.Count == 0 && !isWaiting)
                 {
                     isWaiting = true;
                     gameManager.WonMiniGame();
                 }
             }
+            else if (hit.transform.gameObject.tag == "SantaHat")
+            {
+                Debug.Log("Hit " + hit.transform.gameObject.name);
+
+                isWaiting = true;
+                gameManager.LostMiniGame();
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (foodsToChop.Contains(collision.GetComponent<Rigidbody2D>()))
+        {
+            Debug.Log("Hit " + collision.transform.gameObject.name);
+
+            isWaiting = true;
+            gameManager.LostMiniGame();
         }
     }
 }

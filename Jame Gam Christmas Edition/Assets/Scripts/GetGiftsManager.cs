@@ -62,10 +62,10 @@ public class GetGiftsManager : MonoBehaviour
         objectsToGet.Clear();
 
         // Stores gameManagerScore
-        int gameManagerScore = gameManager.GetScore();
+        int gameManagerRound = gameManager.GetRoundNumber();
 
         // If user is in the first round of games
-        if (gameManagerScore <= 5)
+        if (gameManagerRound == 1)
         {
             // Get and populate 1 random gift game object to the objectsToGet dictionary
             GameObject g = objects[Random.Range(0, 5)];
@@ -76,7 +76,7 @@ public class GetGiftsManager : MonoBehaviour
             display1.enabled = true;
         }
         // If user is in the second round of games
-        else if (gameManagerScore <= 11)
+        else if (gameManagerRound == 2)
         {
             // Get 2 random gift game objects
             GameObject g1 = objects[Random.Range(0, 5)];

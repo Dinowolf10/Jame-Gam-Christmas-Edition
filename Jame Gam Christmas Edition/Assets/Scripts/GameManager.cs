@@ -34,7 +34,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            betweenTimer = betweenWaitTime;
+        betweenTimer = betweenWaitTime;
+
+        roundNumber = 1;
     }
 
     // Update is called once per frame
@@ -188,5 +190,14 @@ public class GameManager : MonoBehaviour
     public int GetScore()
     {
         return score;
+    }
+
+    /// <summary>
+    /// Getter for the current round number
+    /// </summary>
+    /// <returns></returns>
+    public int GetRoundNumber()
+    {
+        return roundNumber;
     }
 }
