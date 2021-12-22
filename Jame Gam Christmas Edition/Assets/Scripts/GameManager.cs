@@ -50,8 +50,6 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log(numLives);
-
                 // Resets mouse state to normal
                 mouseCursor.ResetMouseState();
 
@@ -64,7 +62,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    // Otherwise, load another mini game
+                    // Otherwise, load another mini game/check for the win condition
                     LoadNextScene();
                 }
             }
@@ -81,24 +79,33 @@ public class GameManager : MonoBehaviour
 
         int idx;
 
-        // If all games have been played, reset the played games tracker
+        // If all games have been played, reset the played games tracker and increment the round
         if (playedScenes.Count == 6)
         {
             playedScenes.Clear();
             roundNumber++;
         }
 
-        // Find the index of a game that hasn't been played yet
-        while (playedScenes.Contains(idx = Random.Range(2, 8)))
+        // If the player has completed two rounds, then they win
+        if (roundNumber == 3)
         {
-            continue;
+            SceneManager.LoadScene(9);
         }
+        // Otherwise, load the next mini game
+        else
+        {
+            // Find the index of a game that hasn't been played yet
+            while (playedScenes.Contains(idx = Random.Range(2, 8)))
+            {
+                continue;
+            }
 
-        // Add the scene index to the list of played games
-        playedScenes.Add(idx);
+            // Add the scene index to the list of played games
+            playedScenes.Add(idx);
 
-        // Load the new game
-        SceneManager.LoadScene(idx);
+            // Load the new game
+            SceneManager.LoadScene(idx);
+        }
     }
 
     /// <summary>
