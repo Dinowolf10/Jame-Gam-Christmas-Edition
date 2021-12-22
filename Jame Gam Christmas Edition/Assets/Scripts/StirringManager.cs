@@ -23,7 +23,7 @@ public class StirringManager : MonoBehaviour
     private GameObject stirVictory, startingArrow;
 
     [SerializeField]
-    private Transform directionArrow;
+    private Transform clockwiseArrows, counterClockwiseArrows;
 
     [SerializeField]
     private float directionArrowRotationSpeed;
@@ -42,7 +42,7 @@ public class StirringManager : MonoBehaviour
 
     private int activePointIndex = 0;
 
-    private int score = 0;
+    private int score = 0, roundNumber = 1;
 
     private bool isWaiting = false;
 
@@ -56,11 +56,22 @@ public class StirringManager : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+        roundNumber = gameManager.GetRoundNumber();
+
+        if (roundNumber == 1)
+        {
+            clockwiseArrows.gameObject.SetActive(false);
+        }
+        else if (roundNumber == 2)
+        {
+            counterClockwiseArrows.gameObject.SetActive(false);
+        }
+
         // Hides all points
-        for (int i = 0; i < stirPoints.Length; i++)
+        /*for (int i = 0; i < stirPoints.Length; i++)
         {
             stirPoints[i].gameObject.SetActive(false);
-        }
+        }*/
 
         // Sets activePointIndex to 0
         activePointIndex = 0;
@@ -149,15 +160,31 @@ public class StirringManager : MonoBehaviour
         // Resets the current active point color to white
         //activePointRenderer.material.color = Color.white;
 
-        // If the activePointIndex has reached the end of the stirPoints array, set activePointIndex to 0
-        if (activePointIndex + 1 >= stirPoints.Length)
+        if (roundNumber == 1)
         {
-            activePointIndex = 0;
+            // If the activePointIndex has reached the end of the stirPoints array, set activePointIndex to 0
+            if (activePointIndex + 1 >= stirPoints.Length)
+            {
+                activePointIndex = 0;
+            }
+            // Otherwise increment activePointIndex
+            else
+            {
+                activePointIndex++;
+            }
         }
-        // Otherwise increment activePointIndex
-        else
+        else if (roundNumber == 2)
         {
-            activePointIndex++;
+            // If the activePointIndex has reached the end of the stirPoints array, set activePointIndex to 0
+            if (activePointIndex == 0)
+            {
+                activePointIndex = stirPoints.Length - 1;
+            }
+            // Otherwise increment activePointIndex
+            else
+            {
+                activePointIndex--;
+            }
         }
 
         // Set current active point to the active point index in stirPoints
@@ -213,19 +240,21 @@ public class StirringManager : MonoBehaviour
 
     private void RotateDirectionArrows()
     {
-        Quaternion rotation = new Quaternion(directionArrow.rotation.x, directionArrow.rotation.y, directionArrow.rotation.z, directionArrow.rotation.w);
+        Quaternion rotation;
 
         //rotation.z += (directionArrowRotationSpeed * Time.deltaTime);
 
-        if (gameManager.GetRoundNumber() == 1)
+        if (roundNumber == 1)
         {
+            rotation = new Quaternion(counterClockwiseArrows.rotation.x, counterClockwiseArrows.rotation.y, counterClockwiseArrows.rotation.z, counterClockwiseArrows.rotation.w);
             rotation.z += (directionArrowRotationSpeed * Time.deltaTime);
+            counterClockwiseArrows.rotation = rotation;
         }
-        else if (gameManager.GetRoundNumber() == 2)
+        else if (roundNumber == 2)
         {
+            rotation = new Quaternion(clockwiseArrows.rotation.x, clockwiseArrows.rotation.y, clockwiseArrows.rotation.z, clockwiseArrows.rotation.w);
             rotation.z -= (directionArrowRotationSpeed * Time.deltaTime);
+            clockwiseArrows.rotation = rotation;
         }
-
-        directionArrow.rotation = rotation;
     }
 }
