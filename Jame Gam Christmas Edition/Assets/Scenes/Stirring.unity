@@ -734,7 +734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &588947216
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -977,7 +977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &763288285
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1995,7 +1995,7 @@ MonoBehaviour:
   startingArrow: {fileID: 1989302066}
   clockwiseArrows: {fileID: 763288286}
   counterClockwiseArrows: {fileID: 588947217}
-  directionArrowRotationSpeed: 0.15
+  directionArrowRotationSpeed: 20
   stirPoints:
   - {fileID: 1209913189}
   - {fileID: 1591546775}

@@ -60,11 +60,11 @@ public class StirringManager : MonoBehaviour
 
         if (roundNumber == 1)
         {
-            clockwiseArrows.gameObject.SetActive(false);
+            counterClockwiseArrows.gameObject.SetActive(true);
         }
         else if (roundNumber == 2)
         {
-            counterClockwiseArrows.gameObject.SetActive(false);
+            clockwiseArrows.gameObject.SetActive(true);
         }
 
         // Hides all points
@@ -240,21 +240,17 @@ public class StirringManager : MonoBehaviour
 
     private void RotateDirectionArrows()
     {
-        Quaternion rotation;
-
-        //rotation.z += (directionArrowRotationSpeed * Time.deltaTime);
+        Vector3 rotation;
 
         if (roundNumber == 1)
         {
-            rotation = new Quaternion(counterClockwiseArrows.rotation.x, counterClockwiseArrows.rotation.y, counterClockwiseArrows.rotation.z, counterClockwiseArrows.rotation.w);
-            rotation.z += (directionArrowRotationSpeed * Time.deltaTime);
-            counterClockwiseArrows.rotation = rotation;
+            rotation = new Vector3(counterClockwiseArrows.eulerAngles.x, counterClockwiseArrows.eulerAngles.y, counterClockwiseArrows.eulerAngles.z + directionArrowRotationSpeed * Time.deltaTime);
+            counterClockwiseArrows.eulerAngles = rotation;
         }
         else if (roundNumber == 2)
         {
-            rotation = new Quaternion(clockwiseArrows.rotation.x, clockwiseArrows.rotation.y, clockwiseArrows.rotation.z, clockwiseArrows.rotation.w);
-            rotation.z -= (directionArrowRotationSpeed * Time.deltaTime);
-            clockwiseArrows.rotation = rotation;
+            rotation = new Vector3(clockwiseArrows.eulerAngles.x, clockwiseArrows.eulerAngles.y, clockwiseArrows.eulerAngles.z + directionArrowRotationSpeed * Time.deltaTime);
+            clockwiseArrows.eulerAngles = rotation;
         }
     }
 }
