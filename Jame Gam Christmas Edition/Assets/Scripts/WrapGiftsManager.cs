@@ -104,6 +104,11 @@ public class WrapGiftsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.isGamePaused())
+        {
+            return;
+        }
+
         CheckDragpointPositions();
 
         CheckTime();

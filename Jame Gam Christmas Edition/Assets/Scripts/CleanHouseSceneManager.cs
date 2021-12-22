@@ -50,6 +50,11 @@ public class CleanHouseSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.isGamePaused())
+        {
+            return;
+        }
+
         CheckTime();
 
         UpdateVacuumPosition();

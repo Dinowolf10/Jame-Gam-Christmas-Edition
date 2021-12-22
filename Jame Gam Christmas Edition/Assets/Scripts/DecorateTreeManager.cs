@@ -47,6 +47,11 @@ public class DecorateTreeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.isGamePaused())
+        {
+            return;
+        }
+
         CheckOrnamentPlacement();
         CheckComplete();
         CheckTime();

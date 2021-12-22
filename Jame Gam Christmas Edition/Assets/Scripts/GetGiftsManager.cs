@@ -39,6 +39,11 @@ public class GetGiftsManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (gameManager.isGamePaused())
+        {
+            return;
+        }
+
         // Checks for object hit when user presses left click
         if (Input.GetMouseButtonDown(0))
         {

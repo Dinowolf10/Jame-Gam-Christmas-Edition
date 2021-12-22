@@ -16,6 +16,9 @@ public class MoveOrnament : MonoBehaviour
     private Vector2 initialPosition;
     private Vector2 mousePosition;
 
+    // References
+    private GameManager gameManager;
+
     // Variables
     private float deltaX, deltaY;
     private bool locked = false;
@@ -23,6 +26,8 @@ public class MoveOrnament : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         initialPosition = transform.position;
     }
 
@@ -31,8 +36,11 @@ public class MoveOrnament : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
-        deltaX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
-        deltaY = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
+        if (!gameManager.isGamePaused())
+        {
+            deltaX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
+            deltaY = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
+        }
     }
     
     /// <summary>
@@ -40,9 +48,11 @@ public class MoveOrnament : MonoBehaviour
     /// </summary>
     private void OnMouseDrag()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector2(mousePosition.x - deltaX, mousePosition.y - deltaY);
-
+        if (!gameManager.isGamePaused())
+        {
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = new Vector2(mousePosition.x - deltaX, mousePosition.y - deltaY);
+        }
     }
 
     /// <summary>

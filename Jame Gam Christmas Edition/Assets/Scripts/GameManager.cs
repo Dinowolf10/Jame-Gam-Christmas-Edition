@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private MouseCursor mouseCursor;
 
+    // Reference set in inspector
+    [SerializeField]
+    private PauseMenu pauseMenu;
+
     // Collections
     private HashSet<int> playedScenes = new HashSet<int>();
 
@@ -145,6 +149,11 @@ public class GameManager : MonoBehaviour
         SetGameResult(1);
         DeductLife();
         LoadBetweenScene();
+    }
+
+    public bool isGamePaused()
+    {
+        return pauseMenu.isPaused();
     }
 
     /// <summary>

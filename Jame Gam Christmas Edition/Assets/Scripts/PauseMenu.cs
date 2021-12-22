@@ -9,7 +9,12 @@ public class PauseMenu : MonoBehaviour
 
     // References grabbed in inspector
     [SerializeField]
-    private GameObject pauseButton, backToMenuButton;
+    private GameObject background, pauseButton, backToMenuButton;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -18,10 +23,21 @@ public class PauseMenu : MonoBehaviour
         ResumeGame();
     }
 
+    /// <summary>
+    /// Getter for the state of the pause menu
+    /// </summary>
+    /// <returns></returns>
+    public bool isPaused()
+    {
+        return isGamePaused;
+    }
+
     // Update is called once per frame
     private void Update()
     {
-        // If the user presses the escape or tab key
+        GetComponent<Canvas>().worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+
+        // If the user presses the escape or tab key and they are not at the main menu
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
         {
             // If the game is already paused, resume the game
@@ -42,15 +58,20 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void PauseGame()
     {
-        // Sets time scale to 0
-        Time.timeScale = 0.0f;
+        // If not at the main menu, pause the game
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            // Sets time scale to 0
+            Time.timeScale = 0.0f;
 
-        // Sets isGamePaused to true
-        isGamePaused = true;
+            // Sets isGamePaused to true
+            isGamePaused = true;
 
-        // Shows the pause and back to menu buttons
-        pauseButton.SetActive(true);
-        backToMenuButton.SetActive(true);
+            // Shows the background pause and back to menu buttons
+            background.SetActive(true);
+            pauseButton.SetActive(true);
+            backToMenuButton.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -64,7 +85,8 @@ public class PauseMenu : MonoBehaviour
         // Sets isGamePaused to false
         isGamePaused = false;
 
-        // Hides the pause and back to menu buttons
+        // Hides the background and pause and back to menu buttons
+        background.SetActive(false);
         pauseButton.SetActive(false);
         backToMenuButton.SetActive(false);
     }
@@ -74,6 +96,17 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void ReturnToMenu()
     {
+        // Sets time scale to 1
+        Time.timeScale = 1.0f;
+
+        // Sets isGamePaused to false
+        isGamePaused = false;
+
+        // Hides the pause and back to menu buttons
+        background.SetActive(false);
+        pauseButton.SetActive(false);
+        backToMenuButton.SetActive(false);
+
         // Loads the MainMenu scene
         SceneManager.LoadScene("MainMenu");
     }

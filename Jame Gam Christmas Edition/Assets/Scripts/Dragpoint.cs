@@ -13,6 +13,9 @@ public class Dragpoint : MonoBehaviour
     private Vector2 initialPosition;
     private Vector2 mousePosition;
 
+    // References
+    private GameManager gameManager;
+
     // Variables
     private float deltaX, deltaY;
     private bool locked = false;
@@ -20,6 +23,8 @@ public class Dragpoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         initialPosition = transform.position;
     }
 
@@ -28,7 +33,7 @@ public class Dragpoint : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
-        if (!locked)
+        if (!locked && !gameManager.isGamePaused())
         {
             deltaX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
             deltaY = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
@@ -40,7 +45,7 @@ public class Dragpoint : MonoBehaviour
     /// </summary>
     private void OnMouseDrag()
     {
-        if (!locked)
+        if (!locked && !gameManager.isGamePaused())
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector2(mousePosition.x - deltaX, mousePosition.y - deltaY);
@@ -52,7 +57,7 @@ public class Dragpoint : MonoBehaviour
     /// </summary>
     private void OnMouseUp()
     {
-        if (!locked)
+        if (!locked && !gameManager.isGamePaused())
         {
             transform.position = initialPosition;
         }

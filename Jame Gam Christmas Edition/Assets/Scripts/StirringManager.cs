@@ -84,6 +84,11 @@ public class StirringManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (gameManager.isGamePaused())
+        {
+            return;
+        }
+
         // If player reaches target score, they win
         if (score >= targetScore && !isWaiting)
         {
