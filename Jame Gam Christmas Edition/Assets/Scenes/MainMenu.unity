@@ -236,7 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf2808e90b098f4d9804f65cf4cc822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseCursor: {fileID: 747983113}
 --- !u!1 &223660092
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,10 +745,6 @@ PrefabInstance:
     - target: {fileID: 8323189195493895384, guid: 5be0b8786d0f311419d30b3b589caeea, type: 3}
       propertyPath: m_Name
       value: MouseCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323189195493895384, guid: 5be0b8786d0f311419d30b3b589caeea, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8323189195493895390, guid: 5be0b8786d0f311419d30b3b589caeea, type: 3}
       propertyPath: m_RootOrder

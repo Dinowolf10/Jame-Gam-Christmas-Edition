@@ -8,6 +8,11 @@ public class ChoppingFoodManager : MonoBehaviour
     private Camera cam;
 
     [SerializeField]
+    private Transform knife;
+
+    private Vector2 mousePos;
+
+    [SerializeField]
     private float throwForce = 1f;
 
     // Populated in editor
@@ -42,6 +47,8 @@ public class ChoppingFoodManager : MonoBehaviour
             return;
         }
 
+        UpdateKnife();
+
         if (Input.GetMouseButtonDown(0))
         {
             isCutting = true;
@@ -55,6 +62,16 @@ public class ChoppingFoodManager : MonoBehaviour
         {
             CheckObjectHit();
         }
+    }
+
+    /// <summary>
+    /// Updates knife position to current mouse position
+    /// </summary>
+    private void UpdateKnife()
+    {
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        knife.position = new Vector2(mousePos.x, mousePos.y);
     }
 
     private void ThrowFoodUp()

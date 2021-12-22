@@ -34,7 +34,7 @@ public class StirringManager : MonoBehaviour
     [SerializeField]
     private int targetScore = 100;
 
-    private Vector3 mousePos;
+    private Vector2 mousePos;
 
     // Start is called before the first frame update
     private void Start()
@@ -93,7 +93,7 @@ public class StirringManager : MonoBehaviour
     /// </summary>
     private void UpdateSpoon()
     {
-        spoonTransform.position = new Vector3(mousePos.x, mousePos.y, 0);
+        spoonTransform.position = mousePos;
     }
 
     /// <summary>
