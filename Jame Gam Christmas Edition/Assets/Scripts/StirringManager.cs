@@ -20,7 +20,13 @@ public class StirringManager : MonoBehaviour
     private Animator stirAnimator;
 
     [SerializeField]
-    private GameObject stirVictory;
+    private GameObject stirVictory, startingArrow;
+
+    [SerializeField]
+    private Transform directionArrow;
+
+    [SerializeField]
+    private float directionArrowRotationSpeed;
 
     // Populated in inspector
     [SerializeField]
@@ -93,6 +99,8 @@ public class StirringManager : MonoBehaviour
         UpdateSpoon();
 
         CheckStirring();
+
+        RotateDirectionArrows();
     }
 
     /// <summary>
@@ -129,6 +137,7 @@ public class StirringManager : MonoBehaviour
             stirAnimator.enabled = true;
             stirAnimator.SetBool("hasStartedStirring", true);
             hasStartedStirring = true;
+            startingArrow.SetActive(false);
         }
 
         isStirring = true;
@@ -138,7 +147,7 @@ public class StirringManager : MonoBehaviour
         activePoint.isActivePoint = false;
 
         // Resets the current active point color to white
-        activePointRenderer.material.color = Color.white;
+        //activePointRenderer.material.color = Color.white;
 
         // If the activePointIndex has reached the end of the stirPoints array, set activePointIndex to 0
         if (activePointIndex + 1 >= stirPoints.Length)
@@ -196,9 +205,27 @@ public class StirringManager : MonoBehaviour
         activePoint.isActivePoint = true;
 
         // Stores a reference to the activePoint's renderer component
-        activePointRenderer = activePoint.gameObject.GetComponent<Renderer>();
+        //activePointRenderer = activePoint.gameObject.GetComponent<Renderer>();
 
         // Sets the active point's color to green
-        activePointRenderer.material.color = Color.green;
+        //activePointRenderer.material.color = Color.green;
+    }
+
+    private void RotateDirectionArrows()
+    {
+        Quaternion rotation = new Quaternion(directionArrow.rotation.x, directionArrow.rotation.y, directionArrow.rotation.z, directionArrow.rotation.w);
+
+        //rotation.z += (directionArrowRotationSpeed * Time.deltaTime);
+
+        if (gameManager.GetRoundNumber() == 1)
+        {
+            rotation.z += (directionArrowRotationSpeed * Time.deltaTime);
+        }
+        else if (gameManager.GetRoundNumber() == 2)
+        {
+            rotation.z -= (directionArrowRotationSpeed * Time.deltaTime);
+        }
+
+        directionArrow.rotation = rotation;
     }
 }
