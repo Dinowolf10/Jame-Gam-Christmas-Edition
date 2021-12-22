@@ -1,13 +1,7 @@
 fileFormatVersion: 2
-guid: 34e68548f9d5b9a4ebcdd86dc0474323
+guid: 8a85cfed2e8c6c04caccd50b5439d3b4
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 6722497941672537069
-    second: stirring_food_victory_anim_0
-  - first:
-      213: 5267431441720125568
-    second: stirring_food_victory_anim_1
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -47,7 +41,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -119,49 +113,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: stirring_food_victory_anim_0
-      rect:
-        serializedVersion: 2
-        x: 11
-        y: 0
-        width: 266
-        height: 170
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: debafa8b24c1b4d50800000000000000
-      internalID: 6722497941672537069
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stirring_food_victory_anim_1
-      rect:
-        serializedVersion: 2
-        x: 300
-        y: 0
-        width: 266
-        height: 169
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 088a37afcfca91940800000000000000
-      internalID: 5267431441720125568
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

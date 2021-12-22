@@ -16,9 +16,18 @@ public class StirringManager : MonoBehaviour
     [SerializeField]
     private Timer timer;
 
+    [SerializeField]
+    private Animator stirAnimator;
+
+    [SerializeField]
+    private GameObject stirVictory;
+
     // Populated in inspector
     [SerializeField]
     private StirPoint[] stirPoints;
+
+    private bool hasStartedStirring;
+    private bool isStirring;
 
     private GameManager gameManager;
 
@@ -64,6 +73,10 @@ public class StirringManager : MonoBehaviour
             isWaiting = true;
             timer.StopBarDrain();
             gameManager.WonMiniGame();
+
+            StopCoroutine("StartTimerBetweenPoints");
+            stirVictory.SetActive(true);
+            stirAnimator.SetBool("hasWon", true);
         }
 
         // If time runs out, player loses
@@ -78,6 +91,8 @@ public class StirringManager : MonoBehaviour
 
         // Updates spoon position
         UpdateSpoon();
+
+        CheckStirring();
     }
 
     /// <summary>
@@ -101,6 +116,23 @@ public class StirringManager : MonoBehaviour
     /// </summary>
     public void SetNextActivePoint()
     {
+        if (isWaiting)
+        {
+            return;
+        }
+
+        StopCoroutine("StartTimerBetweenPoints");
+        Debug.Log("Stopped Coroutine");
+
+        if (!hasStartedStirring)
+        {
+            stirAnimator.enabled = true;
+            stirAnimator.SetBool("hasStartedStirring", true);
+            hasStartedStirring = true;
+        }
+
+        isStirring = true;
+
         // Hides current active point and sets their isActivePoint bool to false
         activePoint.gameObject.SetActive(false);
         activePoint.isActivePoint = false;
@@ -124,6 +156,31 @@ public class StirringManager : MonoBehaviour
 
         // Setup the new active point
         setupActivePoint();
+
+        StartCoroutine("StartTimerBetweenPoints");
+    }
+
+    private IEnumerator StartTimerBetweenPoints()
+    {
+        Debug.Log("Started Coroutine");
+
+        yield return new WaitForSeconds(0.5f);
+
+        isStirring = false;
+    }
+
+    private void CheckStirring()
+    {
+        if (isStirring)
+        {
+            stirAnimator.enabled = true;
+            Debug.Log("stirring");
+        }
+        else
+        {
+            stirAnimator.enabled = false;
+            Debug.Log("not stirring");
+        }
     }
 
     /// <summary>
