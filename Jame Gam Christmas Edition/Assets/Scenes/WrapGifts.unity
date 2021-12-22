@@ -524,12 +524,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a943107ecdee024bb3a6b3a3f21e9ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  giftSprites:
+  - {fileID: 21300000, guid: 6925c464a11965046a45324e0c7c77f2, type: 3}
+  - {fileID: 21300000, guid: 0eb7f4268122ba740abdfb9e1cb6a640, type: 3}
+  - {fileID: 21300000, guid: f892dcaa57631df4994a8d590b90e2c7, type: 3}
+  - {fileID: 21300000, guid: 128de323f71cdbc40beed3557b991892, type: 3}
+  - {fileID: 21300000, guid: d6780d457bce0314ea59bdac766aea86, type: 3}
+  - {fileID: 21300000, guid: 376b23ca80025b846bb52c5c01573591, type: 3}
   giftPrefab: {fileID: 5630489550914157440, guid: bb9d9ac4e2628714aa004bd23ba0f96e, type: 3}
   timerPrefab: {fileID: 115459659}
-  gifts: []
-  midpoints: []
-  dragpoints: []
-  wrappingPaperSides: []
 --- !u!4 &1517436402
 Transform:
   m_ObjectHideFlags: 0

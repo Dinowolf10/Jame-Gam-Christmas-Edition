@@ -9,16 +9,20 @@ using UnityEngine;
 /// </summary>
 public class WrapGiftsManager : MonoBehaviour
 {
+    // Art
+    [SerializeField] List<Sprite> giftSprites = new List<Sprite>();
+
     // Prefabs
     [SerializeField] GameObject giftPrefab;
     [SerializeField] GameObject timerPrefab;
 
     // Collections
-    [SerializeField] private List<GameObject> gifts = new List<GameObject>();
-    [SerializeField] private List<GameObject> midpoints = new List<GameObject>();
-    [SerializeField] private List<GameObject> dragpoints = new List<GameObject>();
-    [SerializeField] private List<GameObject> wrappingPaperSides = new List<GameObject>();
+    private List<GameObject> gifts = new List<GameObject>();
+    private List<GameObject> midpoints = new List<GameObject>();
+    private List<GameObject> dragpoints = new List<GameObject>();
+    private List<GameObject> wrappingPaperSides = new List<GameObject>();
 
+    // References
     private Timer timer;
     private GameManager gameManager;
 
@@ -40,6 +44,8 @@ public class WrapGiftsManager : MonoBehaviour
         {
             gift = (Instantiate(giftPrefab, Vector3.zero, Quaternion.identity));
 
+            gift.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = giftSprites[Random.Range(0, giftSprites.Count)];
+
             midpoints.Add(gift.transform.GetChild(6).gameObject);
 
             for (int i = 2; i < 6; i++)
@@ -59,6 +65,8 @@ public class WrapGiftsManager : MonoBehaviour
         {
             gift = Instantiate(giftPrefab, new Vector3(-2.5f, 0f, 0f), Quaternion.identity);
 
+            gift.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = giftSprites[Random.Range(0, giftSprites.Count)];
+
             midpoints.Add(gift.transform.GetChild(6).gameObject);
 
             for (int i = 2; i < 6; i++)
@@ -74,6 +82,8 @@ public class WrapGiftsManager : MonoBehaviour
             gifts.Add(gift);
 
             gift = Instantiate(giftPrefab, new Vector3(2.5f, 0f, 0f), Quaternion.identity);
+
+            gift.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = giftSprites[Random.Range(0, giftSprites.Count)];
 
             midpoints.Add(gift.transform.GetChild(6).gameObject);
 
