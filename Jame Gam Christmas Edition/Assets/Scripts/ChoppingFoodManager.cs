@@ -34,7 +34,7 @@ public class ChoppingFoodManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         ThrowFoodUp();
     }
@@ -49,7 +49,7 @@ public class ChoppingFoodManager : MonoBehaviour
 
         UpdateKnife();
 
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             isCutting = true;
         }
@@ -61,7 +61,7 @@ public class ChoppingFoodManager : MonoBehaviour
         if (isCutting)
         {
             CheckObjectHit();
-        }
+        }*/
     }
 
     /// <summary>
@@ -76,7 +76,8 @@ public class ChoppingFoodManager : MonoBehaviour
 
     private void ThrowFoodUp()
     {
-        int roundNumber = gameManager.GetRoundNumber();
+        //int roundNumber = gameManager.GetRoundNumber();
+        int roundNumber = 2;
         int i = 0;
         Rigidbody2D f;
 
@@ -139,14 +140,36 @@ public class ChoppingFoodManager : MonoBehaviour
         }
     }
 
+    public void RemoveFoodToChop(Rigidbody2D rb)
+    {
+        foodsToChop.Remove(rb);
+
+        if (foodsToChop.Count == 0 && !isWaiting)
+        {
+            isWaiting = true;
+            gameManager.WonMiniGame();
+        }
+    }
+
+    public void LoseGame()
+    {
+        isWaiting = true;
+        gameManager.LostMiniGame();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (foodsToChop.Contains(collision.GetComponent<Rigidbody2D>()))
+        if (foodsToChop.Contains(collision.GetComponent<Rigidbody2D>()) && !isWaiting)
         {
             Debug.Log("Hit " + collision.transform.gameObject.name);
 
             isWaiting = true;
             gameManager.LostMiniGame();
         }
+    }
+
+    public Vector2 GetMousePosition()
+    {
+        return mousePos;
     }
 }
