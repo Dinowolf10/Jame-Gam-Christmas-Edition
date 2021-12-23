@@ -112,9 +112,6 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void ReturnToMenu()
     {
-        // Reset lives, round counter, and game result
-        gameManager.ResetGameState();
-
         // Sets time scale to 1
         Time.timeScale = 1.0f;
 

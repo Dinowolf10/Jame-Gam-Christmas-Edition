@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
     {
         SetGameResult(0);
         numLives = 4;
+        playedScenes.Clear();
         roundNumber = 1;
     }
 

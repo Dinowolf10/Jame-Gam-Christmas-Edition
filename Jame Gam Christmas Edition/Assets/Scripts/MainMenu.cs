@@ -21,6 +21,9 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
+        // Reset lives and round counter
+        gameManager.ResetGameState();
+
         // Resets mouse state to normal
         mouseCursor.ResetMouseState();
 
@@ -33,9 +36,6 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void LoadMainMenu()
     {
-        // Reset lives and round counter
-        gameManager.ResetGameState();
-
         // Resets mouse state to normal
         mouseCursor.ResetMouseState();
 
