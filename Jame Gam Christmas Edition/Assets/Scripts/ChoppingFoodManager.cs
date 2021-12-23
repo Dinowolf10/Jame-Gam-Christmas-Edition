@@ -34,7 +34,7 @@ public class ChoppingFoodManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         ThrowFoodUp();
     }
@@ -76,8 +76,8 @@ public class ChoppingFoodManager : MonoBehaviour
 
     private void ThrowFoodUp()
     {
-        int roundNumber = gameManager.GetRoundNumber();
-        //int roundNumber = 2;
+        //int roundNumber = gameManager.GetRoundNumber();
+        int roundNumber = 2;
         int i = 0;
         Rigidbody2D f;
 
@@ -92,10 +92,10 @@ public class ChoppingFoodManager : MonoBehaviour
 
         while (i > 0)
         {
-            santaHats[i - 1].AddForce(new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(0.75f, 1.2f) * throwForce), ForceMode2D.Impulse);
+            santaHats[i - 1].AddForce(new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(0.75f, 1.5f) * throwForce), ForceMode2D.Impulse);
 
             f = foods[Random.Range(0, foods.Count)];
-            f.AddForce(new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(0.75f, 1.1f) * throwForce), ForceMode2D.Impulse);
+            f.AddForce(new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(0.8f, 1.2f) * throwForce), ForceMode2D.Impulse);
             Debug.Log(f.name);
             foodsToChop.Add(f);
             foods.Remove(f);

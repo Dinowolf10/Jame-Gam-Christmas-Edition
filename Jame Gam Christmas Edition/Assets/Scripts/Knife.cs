@@ -50,6 +50,8 @@ public class Knife : MonoBehaviour
 
             collisionTransform.GetComponent<SpriteRenderer>().enabled = false;
 
+            collisionTransform.GetComponentInChildren<ParticleSystem>().Play();
+
             choppingFoodManager.RemoveFoodToChop(collisionTransform.GetComponent<Rigidbody2D>());
         }
         else if (collisionTransform.gameObject.tag == "SantaHat")
