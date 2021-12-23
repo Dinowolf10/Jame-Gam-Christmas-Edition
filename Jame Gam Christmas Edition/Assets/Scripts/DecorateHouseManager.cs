@@ -37,6 +37,14 @@ public class DecorateHouseManager : MonoBehaviour
 
         lightJoints[0].transform.position = lightFixtures[0].transform.position;
 
+        if(gameManager.GetRoundNumber() == 2)
+        {
+            lightJoints[2].gameObject.SetActive(true);
+            lightJoints[4].gameObject.SetActive(true);
+            lightFixtures[2].gameObject.SetActive(true);
+            lightFixtures[4].gameObject.SetActive(true);
+        }
+
         ShuffleLightJoints();
     }
 
@@ -99,7 +107,7 @@ public class DecorateHouseManager : MonoBehaviour
         for (int i = 0; i < lightJoints.Count; i++)
         {
             // If a joint has not been placed in the right location, the game is not complete
-            if (!lightJoints[i].GetComponent<MoveLightJoint>().isLocked())
+            if (!lightJoints[i].GetComponent<MoveLightJoint>().isLocked() && lightJoints[i].gameObject.activeSelf)
             {
                 isComplete = false;
             }

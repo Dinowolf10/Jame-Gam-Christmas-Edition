@@ -33,6 +33,7 @@ public class MoveLightJoint : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
+        
         if (!locked && !gameManager.isGamePaused())
         {
             deltaX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
@@ -45,6 +46,7 @@ public class MoveLightJoint : MonoBehaviour
     /// </summary>
     private void OnMouseDrag()
     {
+        
         if (!locked && !gameManager.isGamePaused())
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

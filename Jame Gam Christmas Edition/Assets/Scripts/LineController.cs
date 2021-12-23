@@ -19,7 +19,14 @@ public class LineController : MonoBehaviour
     {
         for (int i = 0; i < points.Length; i++)
         {
-            lineRenderer.SetPosition(i, points[i].position);
+            if (points[i].gameObject.activeSelf)
+            {
+                lineRenderer.SetPosition(i, points[i].position);
+            }
+            else
+            {
+                lineRenderer.SetPosition(i, points[i + 1].position);
+            }
         }
     }
 
