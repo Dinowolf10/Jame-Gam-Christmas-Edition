@@ -11,14 +11,30 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameObject background, pauseButton, backToMenuButton;
 
+    // References grabbed in inspector
+    [SerializeField] 
+    private GameManager gameManager;
+
+    private int numPauseMenus;
+
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        numPauseMenus = FindObjectsOfType<PauseMenu>().Length;
+        if (numPauseMenus != 1)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     // Start is called before the first frame update
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         // Resumes the game
         ResumeGame();
     }
@@ -96,6 +112,9 @@ public class PauseMenu : MonoBehaviour
     /// </summary>
     public void ReturnToMenu()
     {
+        // Reset lives, round counter, and game result
+        gameManager.ResetGameState();
+
         // Sets time scale to 1
         Time.timeScale = 1.0f;
 

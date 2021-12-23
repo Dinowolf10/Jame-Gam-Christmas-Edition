@@ -28,10 +28,19 @@ public class GameManager : MonoBehaviour
     private int roundNumber = 0;
     [SerializeField] float betweenWaitTime;
     private float betweenTimer;
+    private int numGameManagers;
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        numGameManagers = FindObjectsOfType<GameManager>().Length;
+        if (numGameManagers != 1)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
         numLives = 4;
     }
 
@@ -110,6 +119,16 @@ public class GameManager : MonoBehaviour
             // Load the new game
             SceneManager.LoadScene(idx);
         }
+    }
+
+    /// <summary>
+    /// Reinitializes round count and number of lives
+    /// </summary>
+    public void ResetGameState()
+    {
+        SetGameResult(0);
+        numLives = 4;
+        roundNumber = 1;
     }
 
     /// <summary>

@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private GameManager gameManager;
+
     private MouseCursor mouseCursor;
 
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         mouseCursor = GameObject.Find("MouseCursor").GetComponent<MouseCursor>();
     }
 
@@ -29,6 +33,9 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void LoadMainMenu()
     {
+        // Reset lives and round counter
+        gameManager.ResetGameState();
+
         // Resets mouse state to normal
         mouseCursor.ResetMouseState();
 

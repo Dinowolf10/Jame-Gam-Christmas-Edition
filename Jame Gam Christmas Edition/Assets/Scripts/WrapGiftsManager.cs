@@ -23,6 +23,7 @@ public class WrapGiftsManager : MonoBehaviour
     private List<GameObject> wrappingPaperSides = new List<GameObject>();
 
     // References
+    [SerializeField] GameObject sparkle;
     private Timer timer;
     private GameManager gameManager;
 
@@ -115,6 +116,7 @@ public class WrapGiftsManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp && !isWaiting)
         {
+            ActivateEffects();
             isWaiting = true;
             timer.StopBarDrain();
             gameManager.WonMiniGame();
@@ -211,6 +213,16 @@ public class WrapGiftsManager : MonoBehaviour
             wrappingPaperSides[index].transform.position = newPos;
             wrappingPaperSides[index].GetComponent<SpriteRenderer>().size = new Vector2(1, newScale);
         }
+    }
+
+    private void ActivateEffects()
+    {
+        for (int i = 0; i < gifts.Count; i++) 
+        {
+            gifts[i].transform.GetChild(11).gameObject.SetActive(true);
+        }
+
+        sparkle.SetActive(true);
     }
 
     /// <summary>
