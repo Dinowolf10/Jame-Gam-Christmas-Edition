@@ -130,7 +130,7 @@ public class ChoppingFoodManager : MonoBehaviour
                     gameManager.WonMiniGame();
                 }
             }
-            else if (hit.transform.gameObject.tag == "SantaHat")
+            else if (hit.transform.gameObject.tag == "SantaHat" && !isWaiting)
             {
                 Debug.Log("Hit " + hit.transform.gameObject.name);
 
