@@ -40,7 +40,7 @@ public class MainMenu : MonoBehaviour
         mouseCursor.ResetMouseState();
 
         // Loads the main menu
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainMenu");
     }
 
     /// <summary>

@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             if (betweenTimer > 0)
             {
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
                 // If the player runs out of lives, load the game over scene
                 if (numLives == 0)
                 {
-                    SceneManager.LoadScene(9);
+                    SceneManager.LoadScene("GameOver");
                 }
                 else
                 {
@@ -102,13 +102,13 @@ public class GameManager : MonoBehaviour
         // If the player has completed two rounds, then they win
         if (roundNumber == 3)
         {
-            SceneManager.LoadScene(10);
+            SceneManager.LoadScene("GameWon");
         }
         // Otherwise, load the next mini game
         else
         {
             // Find the index of a game that hasn't been played yet
-            while (playedScenes.Contains(idx = Random.Range(2, 9)))
+            while (playedScenes.Contains(idx = Random.Range(3, 10)))
             {
                 continue;
             }
@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void LoadBetweenScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("BetweenGames");
     }
 
     /// <summary>
