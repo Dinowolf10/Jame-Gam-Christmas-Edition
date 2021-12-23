@@ -21,6 +21,7 @@ public class DecorateHouseManager : MonoBehaviour
     [SerializeField] GameObject sparkle2;
     private Timer timer;
     private GameManager gameManager;
+    private SoundManager soundManager;
 
     // Variables
     private bool isGameWon = false;
@@ -32,6 +33,8 @@ public class DecorateHouseManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         timer = timerPrefab.GetComponent<Timer>();
 
@@ -57,7 +60,7 @@ public class DecorateHouseManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp && !isWaiting)
         {
-            gameManager.PlaySparkleSound();
+            soundManager.PlaySparkleSound();
             ActivateSparkles();
             isWaiting = true;
             timer.StopBarDrain();
@@ -121,7 +124,7 @@ public class DecorateHouseManager : MonoBehaviour
                 // If this is the pre-placed joint, don't play the sound effect
                 if (i != 0)
                 {
-                    gameManager.PlayGrabSound();
+                    soundManager.PlayGrabSound();
                 }
                 newPos = lightFixtures[i].transform.position;
                 lightJoints[i].transform.position = new Vector3(newPos.x, newPos.y - 0.25f, newPos.z);

@@ -20,6 +20,17 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip minigameLoseSound;
     [SerializeField] AudioClip sparkleSound;
     [SerializeField] AudioClip wrongChoiceSound;
+    [SerializeField] AudioClip boilingSound;
+    [SerializeField] AudioClip slashSound;
+    [SerializeField] AudioClip splatSound;
+    [SerializeField] AudioClip treeDecorationSound;
+    [SerializeField] AudioClip uhOhSound;
+    [SerializeField] AudioClip vacuumSound;
+    [SerializeField] AudioClip vacuumSuckSound;
+    [SerializeField] AudioClip dingDongSound;
+    [SerializeField] AudioClip buttonHoverSound;
+    [SerializeField] AudioClip mainMenuSound;
+    [SerializeField] AudioClip mainGameplaySound;
 
     // Variables
     private int numSoundManagers;
@@ -102,5 +113,64 @@ public class SoundManager : MonoBehaviour
     public void PlayWrongChoiceSound()
     {
         audioSource.PlayOneShot(wrongChoiceSound);
+    }
+
+    public void PlayBoilingSound()
+    {
+        audioSource.PlayOneShot(boilingSound);
+    }
+
+    public void PlaySlashSound()
+    {
+        audioSource.PlayOneShot(slashSound);
+    }
+
+    public void PlaySplatSound()
+    {
+        audioSource.PlayOneShot(splatSound);
+    }
+
+    public void PlayTreeDecorationSound()
+    {
+        audioSource.PlayOneShot(treeDecorationSound);
+    }
+
+    public void PlayUhOhSound()
+    {
+        audioSource.PlayOneShot(uhOhSound);
+    }
+
+    public void PlayVacuumSound()
+    {
+        audioSource.PlayOneShot(vacuumSound);
+    }
+
+    public void PlayVacuumSuckSound()
+    {
+        audioSource.PlayOneShot(vacuumSuckSound);
+    }
+
+    public void PlayDingDongSound()
+    {
+        audioSource.PlayOneShot(dingDongSound);
+    }
+
+    public void PlayButtonHoverSound()
+    {
+        audioSource.PlayOneShot(buttonHoverSound);
+    }
+
+    public void PlayMainMenuSound()
+    {
+        audioSource.clip = mainMenuSound;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    public void PlayMainGameplaySound()
+    {
+        audioSource.clip = mainGameplaySound;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 }

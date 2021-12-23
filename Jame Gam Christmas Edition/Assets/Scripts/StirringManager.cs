@@ -40,6 +40,7 @@ public class StirringManager : MonoBehaviour
     private bool isStirring;
 
     private GameManager gameManager;
+    private SoundManager soundManager;
 
     private StirPoint activePoint;
     private Renderer activePointRenderer;
@@ -59,6 +60,8 @@ public class StirringManager : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         roundNumber = gameManager.GetRoundNumber();
 

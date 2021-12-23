@@ -18,6 +18,7 @@ public class DecorateTreeManager : MonoBehaviour
     [SerializeField] GameObject sparkle2;
     private Timer timer;
     private GameManager gameManager;
+    private SoundManager soundManager;
 
     // Collections
     private List<GameObject> ornaments = new List<GameObject>();
@@ -39,6 +40,8 @@ public class DecorateTreeManager : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+
         timer = timerPrefab.GetComponent<Timer>();
 
         SpawnOrnaments();
@@ -58,7 +61,7 @@ public class DecorateTreeManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp && !isWaiting)
         {
-            gameManager.PlaySparkleSound();
+            soundManager.PlaySparkleSound();
             ActivateSparkles();
             isWaiting = true;
             timer.StopBarDrain();
@@ -123,7 +126,7 @@ public class DecorateTreeManager : MonoBehaviour
             {
                 if (AABBCollision(ornaments[i], treeBlocks[j]) && !ornaments[i].GetComponent<MoveOrnament>().isLocked())
                 {
-                    gameManager.PlayGrabSound();
+                    soundManager.PlayGrabSound();
                     ornaments[i].GetComponent<MoveOrnament>().LockOrnament();
                 }
             }

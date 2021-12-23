@@ -20,6 +20,7 @@ public class CleanHouseSceneManager : MonoBehaviour
     [SerializeField] GameObject sparkle2;
     private Timer timer;
     private GameManager gameManager;
+    private SoundManager soundManager;
 
     // Variables
     private GameObject dirt;
@@ -31,6 +32,10 @@ public class CleanHouseSceneManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+
+        soundManager.PlayVacuumSound();
 
         int roundNumber = gameManager.GetRoundNumber();
 
@@ -45,6 +50,7 @@ public class CleanHouseSceneManager : MonoBehaviour
         
         
         timer = timerPrefab.GetComponent<Timer>();
+
     }
 
     // Update is called once per frame
@@ -61,7 +67,7 @@ public class CleanHouseSceneManager : MonoBehaviour
 
         if (dirt.transform.childCount == 0 && !isTimeUp && !isWaiting)
         {
-            gameManager.PlaySparkleSound();
+            soundManager.PlaySparkleSound();
             ActivateSparkles();
             isWaiting = true;
             isGameWon = true;

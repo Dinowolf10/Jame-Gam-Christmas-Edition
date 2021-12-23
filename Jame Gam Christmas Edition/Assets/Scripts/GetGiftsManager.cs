@@ -23,6 +23,7 @@ public class GetGiftsManager : MonoBehaviour
     public Dictionary<string, GameObject> objectsToGet = new Dictionary<string, GameObject>();
 
     private GameManager gameManager;
+    private SoundManager soundManager;
 
     private bool hasWon = false;
     private bool isWaiting = false;
@@ -31,6 +32,8 @@ public class GetGiftsManager : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         // Populates objectsToGet
         PopulateObjectsToGet();
@@ -136,7 +139,7 @@ public class GetGiftsManager : MonoBehaviour
 
                 // If the objectsToGet count is 0 and the player is not currently waiting for the scene switch
                 if (objectsToGet.Count == 0 && !isWaiting)
-                {
+                { 
                     // Set isWaiting to true
                     isWaiting = true;
 

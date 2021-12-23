@@ -123,6 +123,10 @@ public class PauseMenu : MonoBehaviour
         pauseButton.SetActive(false);
         backToMenuButton.SetActive(false);
 
+        // Stop the current audio/music
+        gameManager.StopAudio();
+        gameManager.PlayMainMenuSound();
+
         // Loads the MainMenu scene
         SceneManager.LoadScene("MainMenu");
     }

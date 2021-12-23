@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
         betweenTimer = betweenWaitTime;
 
         roundNumber = 1;
+
+        soundManager.PlayMainMenuSound();
     }
 
     // Update is called once per frame
@@ -75,6 +77,7 @@ public class GameManager : MonoBehaviour
                 // If the player runs out of lives, load the game over scene
                 if (numLives <= 0)
                 {
+                    soundManager.StopAllAudio();
                     soundManager.PlayGameOverSound();
                     SceneManager.LoadScene("GameOver");
                 }
@@ -107,6 +110,7 @@ public class GameManager : MonoBehaviour
         // If the player has completed two rounds, then they win
         if (roundNumber == 3)
         {
+            soundManager.StopAllAudio();
             soundManager.PlayGameVictorySound();
             SceneManager.LoadScene("GameWon");
         }
@@ -179,20 +183,14 @@ public class GameManager : MonoBehaviour
         LoadBetweenScene();
     }
 
-    /// <summary>
-    /// Tell the SoundManager to play the Sparkle sound
-    /// </summary>
-    public void PlaySparkleSound()
+    public void PlayMainMenuSound()
     {
-        soundManager.PlaySparkleSound();
+        soundManager.PlayMainMenuSound();
     }
 
-    /// <summary>
-    /// Tell the SoundManager to play the Grab sound
-    /// </summary>
-    public void PlayGrabSound()
+    public void PlayMainGameplaySound()
     {
-        soundManager.PlayGrabSound();
+        soundManager.PlayMainGameplaySound();
     }
 
     /// <summary>

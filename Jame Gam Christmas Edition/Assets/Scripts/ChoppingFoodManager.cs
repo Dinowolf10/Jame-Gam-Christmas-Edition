@@ -30,11 +30,14 @@ public class ChoppingFoodManager : MonoBehaviour
     private bool isWaiting = false;
 
     private GameManager gameManager;
+    private SoundManager soundManager;
 
     // Start is called before the first frame update
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         ThrowFoodUp();
     }
@@ -42,7 +45,7 @@ public class ChoppingFoodManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (isWaiting)
+        if (isWaiting || gameManager.isGamePaused())
         {
             return;
         }

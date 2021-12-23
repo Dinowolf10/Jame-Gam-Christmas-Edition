@@ -1694,6 +1694,17 @@ MonoBehaviour:
   minigameLoseSound: {fileID: 8300000, guid: bb1919bb9b7d4324089081ba92bb3f35, type: 3}
   sparkleSound: {fileID: 8300000, guid: a5804c14d7a4ea1468bfa2f8c5a6a6a0, type: 3}
   wrongChoiceSound: {fileID: 8300000, guid: cd2edb562cb02bd4bb1c2aae941cce95, type: 3}
+  boilingSound: {fileID: 8300000, guid: 27e7a0065e95a194588d4ee0b880a7da, type: 3}
+  slashSound: {fileID: 8300000, guid: f221f84a11573b846ac7ab3a8eed5f40, type: 3}
+  splatSound: {fileID: 8300000, guid: d16fc55ea6c073c47a25dd01f10989f4, type: 3}
+  treeDecorationSound: {fileID: 8300000, guid: 601c74b0f40d95543a08b36389c2e895, type: 3}
+  uhOhSound: {fileID: 8300000, guid: 1fdce4c99546c5a4498a9dfd066788a1, type: 3}
+  vacuumSound: {fileID: 8300000, guid: 2e4a40a3208c9354894bfd555bae6081, type: 3}
+  vacuumSuckSound: {fileID: 8300000, guid: d9743a7425e7cea4294956d26f5ad3c8, type: 3}
+  dingDongSound: {fileID: 8300000, guid: e5f4312f4b7721e429c970364fd34d13, type: 3}
+  buttonHoverSound: {fileID: 8300000, guid: 0263ed9283ee0ff4dbc39bb2b5d15646, type: 3}
+  mainMenuSound: {fileID: 8300000, guid: 57f9dd6edcc8e2347882e22bcdcbcbf2, type: 3}
+  mainGameplaySound: {fileID: 8300000, guid: 69a91732ae2710a4ebdbccff3150ac34, type: 3}
 --- !u!4 &764186511
 Transform:
   m_ObjectHideFlags: 0

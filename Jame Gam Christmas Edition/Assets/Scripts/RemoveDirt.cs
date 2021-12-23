@@ -11,10 +11,13 @@ public class RemoveDirt : MonoBehaviour
 {
     // References
     private GameManager gameManager;
+    private SoundManager soundManager;
 
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     /// <summary>
@@ -24,6 +27,7 @@ public class RemoveDirt : MonoBehaviour
     {
         if (!gameManager.isGamePaused())
         {
+            soundManager.PlayVacuumSuckSound();
             Destroy(this.gameObject);
         }
     }

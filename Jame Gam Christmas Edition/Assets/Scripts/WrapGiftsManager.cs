@@ -26,6 +26,7 @@ public class WrapGiftsManager : MonoBehaviour
     [SerializeField] GameObject sparkle;
     private Timer timer;
     private GameManager gameManager;
+    private SoundManager soundManager;
 
     // Variables
     private bool isGameWon = false;
@@ -36,6 +37,8 @@ public class WrapGiftsManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         timer = timerPrefab.GetComponent<Timer>();
 
@@ -116,7 +119,7 @@ public class WrapGiftsManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp && !isWaiting)
         {
-            gameManager.PlaySparkleSound();
+            soundManager.PlaySparkleSound();
             ActivateEffects();
             isWaiting = true;
             timer.StopBarDrain();
@@ -150,7 +153,7 @@ public class WrapGiftsManager : MonoBehaviour
                 Mathf.Abs(dragpoints[i].transform.position.y - midpoints[Mathf.Clamp(i - 3, 0, 1)].transform.position.y) < 0.5f &&
                 !dragpoints[i].GetComponent<Dragpoint>().isLocked())
             {
-                gameManager.PlayGrabSound();
+                soundManager.PlayGrabSound();
                 newPos = midpoints[Mathf.Clamp(i - 3, 0, 1)].transform.position;
                 dragpoints[i].transform.position = new Vector3(newPos.x, newPos.y, newPos.z);
                 dragpoints[i].GetComponent<Dragpoint>().LockDragpoint();
