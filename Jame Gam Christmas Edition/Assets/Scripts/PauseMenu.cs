@@ -75,7 +75,7 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         // If not at the main menu, pause the game
-        if (SceneManager.GetActiveScene().buildIndex != 0)
+        if (SceneManager.GetActiveScene().buildIndex != 1)
         {
             // Sets time scale to 0
             Time.timeScale = 0.0f;

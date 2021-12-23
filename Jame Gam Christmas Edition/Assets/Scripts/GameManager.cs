@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
                 betweenTimer = betweenWaitTime;
 
                 // If the player runs out of lives, load the game over scene
-                if (numLives == 0)
+                if (numLives <= 0)
                 {
                     SceneManager.LoadScene("GameOver");
                 }
