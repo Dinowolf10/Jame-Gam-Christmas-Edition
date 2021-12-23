@@ -137,6 +137,9 @@ public class GetGiftsManager : MonoBehaviour
 
                 Debug.Log("Got Object!");
 
+                soundManager.PlayGrabSound();
+                soundManager.PlaySparkleSound();
+
                 // If the objectsToGet count is 0 and the player is not currently waiting for the scene switch
                 if (objectsToGet.Count == 0 && !isWaiting)
                 { 
@@ -152,6 +155,10 @@ public class GetGiftsManager : MonoBehaviour
                     // Set hasWon to true
                     hasWon = true;
                 }
+            }
+            else
+            {
+                soundManager.PlayWrongChoiceSound();
             }
         }
     }

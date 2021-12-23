@@ -15,6 +15,9 @@ public class ChoppingFoodManager : MonoBehaviour
     [SerializeField]
     private float throwForce = 1f;
 
+    [SerializeField]
+    public AudioSource slashAudio;
+
     // Populated in editor
     [SerializeField]
     private List<Rigidbody2D> foods;
@@ -174,5 +177,10 @@ public class ChoppingFoodManager : MonoBehaviour
     public Vector2 GetMousePosition()
     {
         return mousePos;
+    }
+    
+    public SoundManager getSoundManager()
+    {
+        return soundManager;
     }
 }

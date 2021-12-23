@@ -65,6 +65,8 @@ public class StirringManager : MonoBehaviour
 
         roundNumber = gameManager.GetRoundNumber();
 
+        //soundManager.PlayBoilingSound();
+
         //roundNumber = 1;
 
         if (roundNumber == 1)
@@ -101,6 +103,8 @@ public class StirringManager : MonoBehaviour
         // If player reaches target score, they win
         if (score >= targetScore && !isWaiting)
         {
+            soundManager.PlaySparkleSound();
+
             isWaiting = true;
             timer.StopBarDrain();
             gameManager.WonMiniGame();

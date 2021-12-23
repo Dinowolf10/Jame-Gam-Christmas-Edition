@@ -844,6 +844,10 @@ PrefabInstance:
       propertyPath: timerBar
       value: 
       objectReference: {fileID: 1603181083}
+    - target: {fileID: 4317444884409814655, guid: d920bf87d65f68f4485d0948a00f671c, type: 3}
+      propertyPath: timeRemaining
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d920bf87d65f68f4485d0948a00f671c, type: 3}
 --- !u!1 &1096131028

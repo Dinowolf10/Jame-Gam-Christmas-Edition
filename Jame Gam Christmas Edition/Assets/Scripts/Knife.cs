@@ -52,11 +52,18 @@ public class Knife : MonoBehaviour
 
             collisionTransform.GetComponentInChildren<ParticleSystem>().Play();
 
+            //choppingFoodManager.slashAudio.Play();
+            choppingFoodManager.getSoundManager().PlaySlashSound();
+            choppingFoodManager.getSoundManager().PlaySplatSound();
+
             choppingFoodManager.RemoveFoodToChop(collisionTransform.GetComponent<Rigidbody2D>());
         }
         else if (collisionTransform.gameObject.tag == "SantaHat")
         {
             Debug.Log("Hit " + collisionTransform.gameObject.name);
+
+            choppingFoodManager.getSoundManager().PlaySlashSound();
+            choppingFoodManager.getSoundManager().PlayWrongChoiceSound();
 
             choppingFoodManager.LoseGame();
         }
