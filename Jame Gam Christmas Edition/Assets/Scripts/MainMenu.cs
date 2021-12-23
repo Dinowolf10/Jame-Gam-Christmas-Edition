@@ -39,6 +39,9 @@ public class MainMenu : MonoBehaviour
         // Resets mouse state to normal
         mouseCursor.ResetMouseState();
 
+        // Stop the current audio/music
+        gameManager.StopAudio();
+
         // Loads the main menu
         SceneManager.LoadScene("MainMenu");
     }

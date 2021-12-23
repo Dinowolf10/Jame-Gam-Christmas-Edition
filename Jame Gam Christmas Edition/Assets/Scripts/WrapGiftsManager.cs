@@ -116,6 +116,7 @@ public class WrapGiftsManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp && !isWaiting)
         {
+            gameManager.PlaySparkleSound();
             ActivateEffects();
             isWaiting = true;
             timer.StopBarDrain();
@@ -149,6 +150,7 @@ public class WrapGiftsManager : MonoBehaviour
                 Mathf.Abs(dragpoints[i].transform.position.y - midpoints[Mathf.Clamp(i - 3, 0, 1)].transform.position.y) < 0.5f &&
                 !dragpoints[i].GetComponent<Dragpoint>().isLocked())
             {
+                gameManager.PlayGrabSound();
                 newPos = midpoints[Mathf.Clamp(i - 3, 0, 1)].transform.position;
                 dragpoints[i].transform.position = new Vector3(newPos.x, newPos.y, newPos.z);
                 dragpoints[i].GetComponent<Dragpoint>().LockDragpoint();

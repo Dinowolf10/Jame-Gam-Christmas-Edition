@@ -57,6 +57,7 @@ public class DecorateHouseManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp && !isWaiting)
         {
+            gameManager.PlaySparkleSound();
             ActivateSparkles();
             isWaiting = true;
             timer.StopBarDrain();
@@ -114,8 +115,14 @@ public class DecorateHouseManager : MonoBehaviour
 
             // If this joint has been properly placed, snap it in place and lock it
             if (Mathf.Abs(lightJoints[i].transform.position.x - lightFixtures[i].transform.position.x) < 0.5f &&
-                Mathf.Abs(lightJoints[i].transform.position.y - lightFixtures[i].transform.position.y) < 0.5f)
+                Mathf.Abs(lightJoints[i].transform.position.y - lightFixtures[i].transform.position.y) < 0.5f &&
+                !lightJoints[i].GetComponent<MoveLightJoint>().isLocked())
             {
+                // If this is the pre-placed joint, don't play the sound effect
+                if (i != 0)
+                {
+                    gameManager.PlayGrabSound();
+                }
                 newPos = lightFixtures[i].transform.position;
                 lightJoints[i].transform.position = new Vector3(newPos.x, newPos.y - 0.25f, newPos.z);
                 lightJoints[i].GetComponent<MoveLightJoint>().LockLight();

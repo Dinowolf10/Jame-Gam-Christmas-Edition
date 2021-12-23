@@ -61,6 +61,7 @@ public class CleanHouseSceneManager : MonoBehaviour
 
         if (dirt.transform.childCount == 0 && !isTimeUp && !isWaiting)
         {
+            gameManager.PlaySparkleSound();
             ActivateSparkles();
             isWaiting = true;
             isGameWon = true;

@@ -58,6 +58,7 @@ public class DecorateTreeManager : MonoBehaviour
 
         if (isGameWon && !isTimeUp && !isWaiting)
         {
+            gameManager.PlaySparkleSound();
             ActivateSparkles();
             isWaiting = true;
             timer.StopBarDrain();
@@ -120,8 +121,9 @@ public class DecorateTreeManager : MonoBehaviour
         {
             for (int j = 0; j < treeBlocks.Count; j++)
             {
-                if (AABBCollision(ornaments[i], treeBlocks[j]))
+                if (AABBCollision(ornaments[i], treeBlocks[j]) && !ornaments[i].GetComponent<MoveOrnament>().isLocked())
                 {
+                    gameManager.PlayGrabSound();
                     ornaments[i].GetComponent<MoveOrnament>().LockOrnament();
                 }
             }

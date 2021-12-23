@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
 
     // Reference set in inspector
     [SerializeField]
+    private SoundManager soundManager;
+
+    // Reference set in inspector
+    [SerializeField]
     private PauseMenu pauseMenu;
 
     // Collections
@@ -71,6 +75,7 @@ public class GameManager : MonoBehaviour
                 // If the player runs out of lives, load the game over scene
                 if (numLives <= 0)
                 {
+                    soundManager.PlayGameOverSound();
                     SceneManager.LoadScene("GameOver");
                 }
                 else
@@ -102,6 +107,7 @@ public class GameManager : MonoBehaviour
         // If the player has completed two rounds, then they win
         if (roundNumber == 3)
         {
+            soundManager.PlayGameVictorySound();
             SceneManager.LoadScene("GameWon");
         }
         // Otherwise, load the next mini game
@@ -145,6 +151,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void WonMiniGame()
     {
+        soundManager.PlayMinigameWinSound();
         StartCoroutine(WinPause());
     }
 
@@ -160,6 +167,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void LostMiniGame()
     {
+        soundManager.PlayMinigameLoseSound();
         StartCoroutine(LosePause());
     }
 
@@ -169,6 +177,30 @@ public class GameManager : MonoBehaviour
         SetGameResult(1);
         DeductLife();
         LoadBetweenScene();
+    }
+
+    /// <summary>
+    /// Tell the SoundManager to play the Sparkle sound
+    /// </summary>
+    public void PlaySparkleSound()
+    {
+        soundManager.PlaySparkleSound();
+    }
+
+    /// <summary>
+    /// Tell the SoundManager to play the Grab sound
+    /// </summary>
+    public void PlayGrabSound()
+    {
+        soundManager.PlayGrabSound();
+    }
+
+    /// <summary>
+    /// Tell the SoundManager to stop all audio
+    /// </summary>
+    public void StopAudio()
+    {
+        soundManager.StopAllAudio();
     }
 
     public bool isGamePaused()
