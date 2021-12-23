@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StirringManager : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class StirringManager : MonoBehaviour
 
     [SerializeField]
     private float directionArrowRotationSpeed;
+
+    [SerializeField]
+    private Slider progressSlider;
 
     // Populated in inspector
     [SerializeField]
@@ -58,6 +62,8 @@ public class StirringManager : MonoBehaviour
 
         roundNumber = gameManager.GetRoundNumber();
 
+        //roundNumber = 1;
+
         if (roundNumber == 1)
         {
             counterClockwiseArrows.gameObject.SetActive(true);
@@ -78,7 +84,7 @@ public class StirringManager : MonoBehaviour
 
         // Sets up first active point
         activePoint = stirPoints[activePointIndex];
-        setupActivePoint();
+        SetupActivePoint();
     }
 
     // Update is called once per frame
@@ -196,7 +202,9 @@ public class StirringManager : MonoBehaviour
         activePoint = stirPoints[activePointIndex];
 
         // Setup the new active point
-        setupActivePoint();
+        SetupActivePoint();
+
+        UpdateProgressBar();
 
         StartCoroutine("StartTimerBetweenPoints");
     }
@@ -227,7 +235,7 @@ public class StirringManager : MonoBehaviour
     /// <summary>
     /// Sets up the current active point
     /// </summary>
-    private void setupActivePoint()
+    private void SetupActivePoint()
     {
         // Increases score
         score++;
@@ -257,5 +265,10 @@ public class StirringManager : MonoBehaviour
             rotation = new Vector3(clockwiseArrows.eulerAngles.x, clockwiseArrows.eulerAngles.y, clockwiseArrows.eulerAngles.z + directionArrowRotationSpeed * Time.deltaTime);
             clockwiseArrows.eulerAngles = rotation;
         }
+    }
+
+    private void UpdateProgressBar()
+    {
+        progressSlider.value = (float)score / (float)targetScore;
     }
 }

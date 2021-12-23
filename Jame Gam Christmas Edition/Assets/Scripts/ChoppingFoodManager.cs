@@ -34,7 +34,7 @@ public class ChoppingFoodManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         ThrowFoodUp();
     }
@@ -76,8 +76,8 @@ public class ChoppingFoodManager : MonoBehaviour
 
     private void ThrowFoodUp()
     {
-        //int roundNumber = gameManager.GetRoundNumber();
-        int roundNumber = 2;
+        int roundNumber = gameManager.GetRoundNumber();
+        //int roundNumber = 2;
         int i = 0;
         Rigidbody2D f;
 
