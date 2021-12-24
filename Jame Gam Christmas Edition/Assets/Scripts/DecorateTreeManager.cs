@@ -62,6 +62,7 @@ public class DecorateTreeManager : MonoBehaviour
         if (isGameWon && !isTimeUp && !isWaiting)
         {
             soundManager.PlaySparkleSound();
+            LockAllOrnaments();
             ActivateSparkles();
             isWaiting = true;
             timer.StopBarDrain();
@@ -70,6 +71,7 @@ public class DecorateTreeManager : MonoBehaviour
 
         if (isTimeUp && !isGameWon && !isWaiting)
         {
+            LockAllOrnaments();
             isWaiting = true;
             gameManager.LostMiniGame();
         }
@@ -111,6 +113,10 @@ public class DecorateTreeManager : MonoBehaviour
         return new Vector2(XPos, YPos);
     }
 
+    /// <summary>
+    /// Returns a random toy sprite from the list
+    /// </summary>
+    /// <returns>random Sprite</returns>
     private Sprite ChooseRandomSprite()
     {
         int idx = Random.Range(0, sprites.Count - 1);
@@ -118,13 +124,28 @@ public class DecorateTreeManager : MonoBehaviour
         return sprites[idx];
     }
 
+    /// <summary>
+    /// Locks all ornaments at their current location
+    /// </summary>
+    private void LockAllOrnaments()
+    {
+        foreach (GameObject ornament in ornaments)
+        {
+            ornament.GetComponent<MoveOrnament>().LockOrnament();
+        }
+    }
+
+    /// <summary>
+    /// Determines if ornaments have been placed at their proper location and provides feedback if so
+    /// </summary>
     private void CheckOrnamentPlacement()
     {
         for (int i = 0; i < ornaments.Count; i++)
         {
             for (int j = 0; j < treeBlocks.Count; j++)
             {
-                if (AABBCollision(ornaments[i], treeBlocks[j]) && !ornaments[i].GetComponent<MoveOrnament>().isLocked())
+                // If the player drops and unlocked ornament over the tree, lock it in place
+                if (AABBCollision(ornaments[i], treeBlocks[j]) && !ornaments[i].GetComponent<MoveOrnament>().isLocked() && !Input.GetMouseButton(0))
                 {
                     soundManager.PlayGrabSound();
                     ornaments[i].GetComponent<MoveOrnament>().LockOrnament();

@@ -15,6 +15,7 @@ public class Dragpoint : MonoBehaviour
 
     // References
     private GameManager gameManager;
+    private Timer timer;
 
     // Variables
     private float deltaX, deltaY;
@@ -24,6 +25,8 @@ public class Dragpoint : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
 
         initialPosition = transform.position;
     }

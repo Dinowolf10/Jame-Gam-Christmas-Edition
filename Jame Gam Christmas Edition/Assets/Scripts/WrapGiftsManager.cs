@@ -128,8 +128,20 @@ public class WrapGiftsManager : MonoBehaviour
 
         if (isTimeUp && !isGameWon && !isWaiting)
         {
+            LockAllDragpoints();
             isWaiting = true;
             gameManager.LostMiniGame();
+        }
+    }
+
+    /// <summary>
+    /// Locks all dragpoints at their current location
+    /// </summary>
+    private void LockAllDragpoints()
+    {
+        foreach (GameObject dragpoint in dragpoints)
+        {
+            dragpoint.GetComponent<Dragpoint>().LockDragpoint();
         }
     }
 

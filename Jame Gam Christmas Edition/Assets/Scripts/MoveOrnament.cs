@@ -11,6 +11,7 @@ public class MoveOrnament : MonoBehaviour
 {
     // References
     [SerializeField] GameObject tree;
+    [SerializeField] Timer timer;
 
     // Vectors
     private Vector2 initialPosition;
@@ -48,7 +49,7 @@ public class MoveOrnament : MonoBehaviour
     /// </summary>
     private void OnMouseDrag()
     {
-        if (!gameManager.isGamePaused())
+        if (!locked && !gameManager.isGamePaused())
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector2(mousePosition.x - deltaX, mousePosition.y - deltaY);

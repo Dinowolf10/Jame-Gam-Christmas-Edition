@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tree: {fileID: 5132812019861968428, guid: 6a699d858e1c09d43b2fd1db5490a97e, type: 3}
+  timer: {fileID: 4317444884409814655, guid: d920bf87d65f68f4485d0948a00f671c, type: 3}
 --- !u!58 &1781456572945709127
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class MoveLightJoint : MonoBehaviour
     private Vector2 mousePosition;
 
     // References
+    [SerializeField] Timer timer;
     private GameManager gameManager;
 
     // Variables

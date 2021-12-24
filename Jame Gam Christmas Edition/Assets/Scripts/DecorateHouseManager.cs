@@ -69,6 +69,7 @@ public class DecorateHouseManager : MonoBehaviour
 
         if (isTimeUp && !isGameWon && !isWaiting)
         {
+            LockAllLightJoints();
             isWaiting = true;
             gameManager.LostMiniGame();
         }
@@ -85,6 +86,17 @@ public class DecorateHouseManager : MonoBehaviour
         {
             newPos = GetRandomShuffleLocation(lightJoints[i].transform);
             lightJoints[i].transform.position = newPos;
+        }
+    }
+
+    /// <summary>
+    /// Locks all light joints at their current location
+    /// </summary>
+    private void LockAllLightJoints()
+    {
+        foreach (GameObject lightJoint in lightJoints)
+        {
+            lightJoint.GetComponent<MoveLightJoint>().LockLight();
         }
     }
 
