@@ -62,6 +62,16 @@ public class Knife : MonoBehaviour
         {
             Debug.Log("Hit " + collisionTransform.gameObject.name);
 
+            slashAnimator.SetBool("isSlashing", false);
+            StopCoroutine("Slash");
+            StartCoroutine("Slash");
+
+            collisionTransform.GetComponent<ChoppableFood>().GetChopped();
+
+            collisionTransform.GetComponent<BoxCollider2D>().enabled = false;
+
+            collisionTransform.GetComponent<SpriteRenderer>().enabled = false;
+
             choppingFoodManager.getSoundManager().PlaySlashSound();
             choppingFoodManager.getSoundManager().PlayWrongChoiceSound();
 
