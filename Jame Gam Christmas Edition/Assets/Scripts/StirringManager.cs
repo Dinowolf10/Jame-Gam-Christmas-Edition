@@ -54,6 +54,9 @@ public class StirringManager : MonoBehaviour
     [SerializeField]
     private int targetScore = 100;
 
+    [SerializeField]
+    AudioSource boilAudioSource;
+
     private Vector2 mousePos;
 
     // Start is called before the first frame update
@@ -64,6 +67,10 @@ public class StirringManager : MonoBehaviour
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         roundNumber = gameManager.GetRoundNumber();
+
+        boilAudioSource.volume = soundManager.GetVolume();
+
+        boilAudioSource.Play();
 
         //soundManager.PlayBoilingSound();
 

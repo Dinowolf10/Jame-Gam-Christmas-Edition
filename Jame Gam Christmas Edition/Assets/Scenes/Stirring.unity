@@ -2188,6 +2188,7 @@ MonoBehaviour:
   - {fileID: 308513386}
   - {fileID: 1975979559}
   targetScore: 100
+  boilAudioSource: {fileID: 1432976319}
 --- !u!212 &1432976317
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2270,7 +2271,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 27e7a0065e95a194588d4ee0b880a7da, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
