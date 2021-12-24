@@ -153,6 +153,8 @@ public class GameManager : MonoBehaviour
         {
             soundManager.PlaySantaSound();
         }
+
+        mouseCursor.ResetMouseState();
     }
 
     /// <summary>

@@ -21,11 +21,20 @@ public class MainMenu : MonoBehaviour
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         mouseCursor = GameObject.Find("MouseCursor").GetComponent<MouseCursor>();
+
+        // If the game has already been played, set the slider value to the current volume
+        if (gameManager.GetGameResult() != 0)
+        {
+            slider.value = soundManager.GetVolume();
+        }
     }
 
     private void Update()
     {
-        soundManager.SetVolume(slider.value);
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            soundManager.SetVolume(slider.value);
+        }
     }
 
     /// <summary>
