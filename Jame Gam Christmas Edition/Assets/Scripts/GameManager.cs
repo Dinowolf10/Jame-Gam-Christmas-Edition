@@ -148,7 +148,11 @@ public class GameManager : MonoBehaviour
     private void LoadBetweenScene()
     {
         SceneManager.LoadScene("BetweenGames");
-        soundManager.PlaySantaSound();
+
+        if (gameResult == 2)
+        {
+            soundManager.PlaySantaSound();
+        }
     }
 
     /// <summary>
