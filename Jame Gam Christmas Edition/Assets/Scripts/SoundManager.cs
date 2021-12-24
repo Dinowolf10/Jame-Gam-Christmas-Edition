@@ -31,6 +31,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip buttonHoverSound;
     [SerializeField] AudioClip mainMenuSound;
     [SerializeField] AudioClip mainGameplaySound;
+    [SerializeField] AudioClip santaSound;
 
     // Variables
     private int numSoundManagers;
@@ -172,5 +173,10 @@ public class SoundManager : MonoBehaviour
         audioSource.clip = mainGameplaySound;
         audioSource.loop = true;
         audioSource.Play();
+    }
+
+    public void PlaySantaSound()
+    {
+        audioSource.PlayOneShot(santaSound);
     }
 }

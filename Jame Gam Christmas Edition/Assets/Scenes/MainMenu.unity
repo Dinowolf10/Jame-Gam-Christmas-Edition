@@ -1705,6 +1705,7 @@ MonoBehaviour:
   buttonHoverSound: {fileID: 8300000, guid: 0263ed9283ee0ff4dbc39bb2b5d15646, type: 3}
   mainMenuSound: {fileID: 8300000, guid: 57f9dd6edcc8e2347882e22bcdcbcbf2, type: 3}
   mainGameplaySound: {fileID: 8300000, guid: 69a91732ae2710a4ebdbccff3150ac34, type: 3}
+  santaSound: {fileID: 8300000, guid: 963eeeb71fa379146b0e3a1326765bb8, type: 3}
 --- !u!4 &764186511
 Transform:
   m_ObjectHideFlags: 0
