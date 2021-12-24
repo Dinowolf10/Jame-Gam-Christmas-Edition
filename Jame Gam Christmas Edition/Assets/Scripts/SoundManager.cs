@@ -34,6 +34,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip santaSound;
 
     // Variables
+    private float volume;
     private int numSoundManagers;
 
     // Start is called before the first frame update
@@ -50,6 +51,25 @@ public class SoundManager : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
+    }
+
+    /// <summary>
+    /// Set the game volume to a specific level
+    /// </summary>
+    /// <param name="value">value between 0 and 1 representing volume</param>
+    public void SetVolume(float value)
+    {
+        volume = value;
+        audioSource.volume = volume;
+    }
+
+    /// <summary>
+    /// Get the current volume value
+    /// </summary>
+    /// <returns></returns>
+    public float GetVolume()
+    {
+        return volume;
     }
 
     /// <summary>

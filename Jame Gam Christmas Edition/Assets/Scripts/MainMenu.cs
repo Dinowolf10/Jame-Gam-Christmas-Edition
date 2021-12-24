@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] Slider slider;
+
     private GameManager gameManager;
+
+    private SoundManager soundManager;
 
     private MouseCursor mouseCursor;
 
@@ -13,7 +18,14 @@ public class MainMenu : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+
         mouseCursor = GameObject.Find("MouseCursor").GetComponent<MouseCursor>();
+    }
+
+    private void Update()
+    {
+        soundManager.SetVolume(slider.value);
     }
 
     /// <summary>
