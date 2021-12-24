@@ -7,8 +7,12 @@ public class OpeningCutscene : MonoBehaviour
     [SerializeField]
     private AudioSource openingCutsceneSoundManager;
 
-    [SerializeField]
-    private AudioClip doorbellSound;
+    [SerializeField]  private AudioClip doorbellSound;
+    [SerializeField] private AudioClip yawnSound;
+    [SerializeField] private AudioClip huhSound;
+    [SerializeField] private AudioClip shockedSound;
+    [SerializeField] private AudioClip ohCrapSound;
+    [SerializeField] private AudioClip uhOhSounds;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +28,26 @@ public class OpeningCutscene : MonoBehaviour
 
     IEnumerator PlaySounds()
     {
-        yield return new WaitForSeconds(6.0f);
+        openingCutsceneSoundManager.PlayOneShot(yawnSound);
+
+        yield return new WaitForSeconds(2.0f);
+
+        openingCutsceneSoundManager.PlayOneShot(huhSound);
+
+        yield return new WaitForSeconds(2.0f);
+
+        openingCutsceneSoundManager.PlayOneShot(shockedSound);
+
+        yield return new WaitForSeconds(2.0f);
 
         openingCutsceneSoundManager.PlayOneShot(doorbellSound);
+
+        yield return new WaitForSeconds(2.0f);
+
+        openingCutsceneSoundManager.PlayOneShot(uhOhSounds);
+
+        yield return new WaitForSeconds(2.0f);
+
+        openingCutsceneSoundManager.PlayOneShot(ohCrapSound);
     }
 }
