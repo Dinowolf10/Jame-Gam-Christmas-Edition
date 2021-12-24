@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
         mouseCursor = GameObject.Find("MouseCursor").GetComponent<MouseCursor>();
 
         // If the game has already been played, set the slider value to the current volume
-        if (gameManager.GetGameResult() != 0)
+        if (gameManager.GetGameResult() != 0 && SceneManager.GetActiveScene().name == "MainMenu")
         {
             slider.value = soundManager.GetVolume();
         }
